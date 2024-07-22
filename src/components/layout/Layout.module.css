@@ -7,8 +7,6 @@
     align-items: center;
     justify-content: center;
     overflow-x: hidden;
-
-
   }
   
   .main {
@@ -17,11 +15,11 @@
   }
   
   .footerContainer {
-    max-width: 420px;
+    /*max-width: 420px;*/
     position: absolute;
     bottom: 3%;
     height: 54px;
-      width: 85%;
+      width: 100%;
       z-index: 1000;
   }
 

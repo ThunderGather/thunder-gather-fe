@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Home.module.css';
 import { useNavigate } from 'react-router-dom';
+// import Footer from "../components/layout/Footer.tsx";
 
 const categories = [
     { id: 1, name: '밥', imgSrc: '/category/1.png', path: '/category/1' },
@@ -46,6 +47,9 @@ const Home: React.FC = () => {
                     <span className={styles.title}>오늘의 번개⚡️</span>
                 </div>
             </div>
+            {/*<div className={styles.footerContainer}>*/}
+            {/*    <Footer/>*/}
+            {/*</div>*/}
         </div>
     );
 };

@@ -15,24 +15,28 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'SUITE-Regular', sans-serif;
+      
   }
 
   html, body {
-    height: 100%;
+    //height: 100%;
     font-family: 'SUITE-Regular', sans-serif;
     line-height: 1.6;
+      overflow-x: hidden;
+      margin: 0 auto;
   }
-  
 
-  body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    
-  }
+  
+  //
+  //body {
+  //    margin: 0;
+  //    padding: 0;
+  //    box-sizing: border-box;
+  //    display: flex;
+  //    justify-content: center;
+  //    flex-direction: column; /* 모바일 뷰처럼 세로 정렬 */
+  //    align-items: center;
+  //}
 
   a {
     text-decoration: none;
@@ -46,6 +50,8 @@ const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
   }
+  
+  
 `;
 
 export default GlobalStyle;
