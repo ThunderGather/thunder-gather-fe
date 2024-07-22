@@ -1,5 +1,6 @@
 .container {
-    padding: 10px;
+    padding: 25px;
+    width: 100%;
 }
 
 .logoContainer {
@@ -17,7 +18,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     /*카테고리 가로 간격*/
-    grid-column-gap: 25px;
+    grid-column-gap: 22px;
     /*카테고리 세로 간격*/
     grid-row-gap: 6px;
     width: 100%;

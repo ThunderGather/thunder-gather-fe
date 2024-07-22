@@ -24,9 +24,9 @@ function App() {
                 </Routes>
 
                 {/*</Layout>*/}
-                <div className={styles.footerContainer}>
+                {/*<div className={styles.footerContainer}>*/}
                     <Footer/>
-                </div>
+                {/*</div>*/}
             </div>
 
         </Router>
