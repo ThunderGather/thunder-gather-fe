@@ -10,9 +10,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className={styles.layout}>
       <main className={styles.main}>{children}</main>
-      {/*<div className={styles.footerContainer}>*/}
-      {/*<Footer />*/}
-      {/*</div>*/}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 export const URL = {
     home: '/',
-    login: '/login',
+    signin: '/login',
     signup: '/signup',
     post: `/post`,
     createPost: '/post/create',

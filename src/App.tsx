@@ -7,6 +7,8 @@ import Post from './pages/Post';
 import GlobalStyle from './styles/GlobalStyles';
 import Profile from "./pages/Profile.tsx";
 import Footer from "./components/layout/Footer.tsx";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup.tsx";
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
                     <Route path={URL.home} element={<Home/>}/>
                     <Route path={URL.post} element={<Post/>}/>
                     <Route path={URL.profile} element={<Profile/>}/>
+                    <Route path={URL.signin} element={<Login/>}/>
+                    <Route path={URL.signup} element={<Signup/>}/>
                     {/* Add more routes here as needed */}
                 </Routes>
 

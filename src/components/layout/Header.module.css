@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 32px;
+    padding: 15px 28px;
     background-color: white;
 
     /*border-right: 1px solid #E4E4E4;*/
@@ -21,8 +21,8 @@
 .leftIcon, .rightIcon {
     flex: 0 0 auto;
     background-color: var(--PrimaryColor);
-    height: 32px;
-    width: 32px;
+    height: 30px;
+    width: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,7 +35,7 @@
 }
 
 .rightIcon {
-    font-size: 28px;
+    font-size: 26px;
 }
 
 

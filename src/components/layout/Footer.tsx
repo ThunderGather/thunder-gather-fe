@@ -1,8 +1,6 @@
 import styles from './Footer.module.css';
 import React from "react";
-// import { FaHome, FaListAlt, FaPen, FaUser } from 'react-icons/fa';
-import { TbHome } from "react-icons/tb";
-import { TbCategory } from "react-icons/tb";
+import { TbHome, TbCategory } from "react-icons/tb";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -19,6 +17,11 @@ const Footer: React.FC = () => {
   const circleStyle = (targetPath: string) => ({
     backgroundColor: path === targetPath ? '#F7DF66' : 'transparent',
   });
+
+  // Hide the Footer on /login and /signup routes
+  if (path === '/login' || path === '/signup') {
+    return null;
+  }
 
   return (
       <div className={styles.layout}>

@@ -1,3 +1,78 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .headerContainer {
     background-color: blue;
+}
+
+.topContainer {
+    /*background-color: red;*/
+    margin-top: 90px;
+    width: 90%;
+}
+
+/*회원가입 및 로그인 버튼*/
+.signIn {
+    width: 100%;
+    height: 85px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: var(--PrimaryColor);
+    position: relative;
+    margin-bottom: 10px;
+}
+.signInTitle {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.signInSubTitle {
+    font-size: 14px;
+    color: var(--BrownText);
+}
+
+.signInIcon {
+    width: 40px;
+    height: 100%;
+    background-color: black;
+}
+
+.icon {
+    font-size: 24px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.feedback {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: var(--PrimaryColor);
+    position: relative;
+}
+
+.feedbackTitle {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.bottomContainer {
+    margin: 20px;
+    width: 90%;
+}
+
+.myListTitle {
+    font-size: 18px;
 }
