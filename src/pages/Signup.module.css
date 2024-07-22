@@ -35,9 +35,12 @@
     align-items: center;
 }
 
-.formLabel {
-    font-size: 13px;
+.avatarUploader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
+
 
 .submitBtnContainer {
     display: flex;
@@ -55,6 +58,7 @@
     color: #000000;
     font-size: 16px;
     font-weight: 600;
+    margin-top: 10px;
 }
 
 .loginLink {

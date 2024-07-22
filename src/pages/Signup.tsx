@@ -1,9 +1,9 @@
-// Signup.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoCloseOutline } from "react-icons/io5";
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { LockOutlined, UserOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Upload, message } from 'antd';
+import type { UploadProps } from 'antd';
 import styles from './Signup.module.css';
 
 type SignupFieldType = {
@@ -13,12 +13,54 @@ type SignupFieldType = {
     nickname?: string;
 };
 
+type FileType = Parameters<UploadProps['beforeUpload']>[0];
+
+const getBase64 = (img: FileType, callback: (url: string) => void) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result as string));
+    reader.readAsDataURL(img);
+};
+
+const beforeUpload = (file: FileType) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+        message.error('JPG/PNG 파일만 올려주세요!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+        message.error('2MB보다 작은 파일을 올려주세요!');
+    }
+    return isJpgOrPng && isLt2M;
+};
+
 const Signup: React.FC = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [imageUrl, setImageUrl] = useState<string>();
 
     const handleProfile = () => {
         navigate('/profile');
     };
+
+    const handleChange: UploadProps['onChange'] = (info) => {
+        if (info.file.status === 'uploading') {
+            setLoading(true);
+            return;
+        }
+        if (info.file.status === 'done') {
+            getBase64(info.file.originFileObj as FileType, (url) => {
+                setLoading(false);
+                setImageUrl(url);
+            });
+        }
+    };
+
+    const uploadButton = (
+        <div>
+            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </div>
+    );
 
     const onFinish = (values: SignupFieldType) => {
         console.log('Success:', values);
@@ -47,6 +89,24 @@ const Signup: React.FC = () => {
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
+                    <div className={styles.formItem}>
+                        <div className={styles.avatarUploader}>
+                        <Form.Item name="avatar">
+                            <Upload
+                                name="avatar"
+                                listType="picture-circle"
+                                className={styles.avatarUploader}
+                                showUploadList={false}
+                                action="https://jsonplaceholder.typicode.com/posts/"
+                                beforeUpload={beforeUpload}
+                                onChange={handleChange}
+                            >
+                                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                            </Upload>
+                        </Form.Item>
+                        </div>
+                    </div>
+
                     <div className={styles.formItem}>
                         <Form.Item<SignupFieldType>
                             name="username"
