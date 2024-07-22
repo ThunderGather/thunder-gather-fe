@@ -1,10 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './CardItem.module.css';
-import { Avatar, Tooltip } from 'antd';
+import {Avatar, Drawer, Tooltip} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import CardDetail from "./CardDetail.tsx";
 
 const CardItem: React.FC = () => {
+    const [drawerVisible, setDrawerVisible] = useState(false);
+
+    const showDrawer = () => {
+        setDrawerVisible(true);
+    }
+
+    const closeDrawer = () => {
+        setDrawerVisible(false);
+    }
+
     return (
+        <>
         <div className={styles.container}>
             <div className={styles.detailContainer}>
                 <div className={styles.tag}>카페</div>
@@ -35,8 +47,19 @@ const CardItem: React.FC = () => {
                     </Avatar.Group>
                 </div>
             </div>
-            <button className={styles.button}><span>more</span></button>
+            <button className={styles.button} onClick={showDrawer}><span>more</span></button>
         </div>
+            <Drawer
+                title="Post Detail"
+                placement="bottom"
+                closable={true}
+                onClose={closeDrawer}
+                open={drawerVisible}
+                height="90%" // Adjust height as needed
+            >
+                <CardDetail />
+            </Drawer>
+        </>
     );
 };
 

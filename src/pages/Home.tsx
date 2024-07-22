@@ -17,6 +17,7 @@ const categories = [
 
 
 const Home: React.FC = () => {
+
     const navigate = useNavigate();
 
     const handleCategoryClick = (path: string) => {
