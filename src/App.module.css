@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center;
+     align-items: center;
+    height: 100vh;
+    max-width: 768px;
+    min-width: 500px;
+    /*padding: 0 16px;*/
+    border-left: 1px solid #E9E9E9;
+    border-right: 1px solid #E9E9E9;
+  }
+
+:root {
+    --PrimaryColor: #F1EFEB;
+    --BlackColor: #291B12;
+}
+
