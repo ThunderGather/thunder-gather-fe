@@ -54,7 +54,7 @@
     height: 40px;
     width: 120px;
     border-radius: 10px;
-    background-color: #F7DF66;
+    background-color: var(--YellowColor);
     color: #000000;
     font-size: 16px;
     font-weight: 600;

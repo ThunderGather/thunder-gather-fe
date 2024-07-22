@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, DatePicker, Select, InputNumber, Button } from 'antd';
+import { Form, Input, DatePicker, Select, InputNumber, Button, Row, Col } from 'antd';
 import styles from './PostCreate.module.css';
 import Header from "../components/layout/Header.tsx";
 
@@ -22,23 +22,32 @@ const PostCreate: React.FC = () => {
             <Header title='번개 생성' showLeft='no' showRight='yes' />
             <Form
                 form={form}
-                labelCol={{ span: 4 }}
-                wrapperCol={{ span: 18 }}
-                layout="horizontal"
+                layout="vertical" // Changed layout to vertical
                 initialValues={{ size: componentSize }}
                 onValuesChange={onFormLayoutChange}
                 size={componentSize}
                 onFinish={handleSubmit}
-                style={{  margin: '0 auto', width: '100%' }}
+                style={{ margin: '0 auto', width: '100%' }}
             >
                 <Form.Item label="제목" name="title" rules={[{ required: true, message: '제목을 입력해주세요!' }]}>
-                    <Input />
+                    <Input placeholder="제목을 입력해주세요" />
                 </Form.Item>
-                <Form.Item label="날짜" name="date" rules={[{ required: true, message: '날짜를 선택해주세요!' }]}>
-                    <DatePicker />
-                </Form.Item>
+
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Form.Item label="날짜" name="date" rules={[{ required: true, message: '날짜를 선택해주세요!' }]}>
+                            <DatePicker style={{ width: '100%' }} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item label="정원 (2~60)" name="capacity" rules={[{ required: true, message: '정원을 입력해주세요!' }]}>
+                            <InputNumber min={2} max={60} style={{ width: '100%' }} />
+                        </Form.Item>
+                    </Col>
+                </Row>
+
                 <Form.Item label="카테고리" name="category" rules={[{ required: true, message: '카테고리를 선택해주세요!' }]}>
-                    <Select>
+                    <Select placeholder="카테고리를 선택해주세요">
                         <Select.Option value="밥">밥</Select.Option>
                         <Select.Option value="카페">카페</Select.Option>
                         <Select.Option value="술">술</Select.Option>
@@ -49,20 +58,20 @@ const PostCreate: React.FC = () => {
                         <Select.Option value="코딩">코딩</Select.Option>
                     </Select>
                 </Form.Item>
+
                 <Form.Item label="설명" name="description" rules={[{ required: true, message: '설명을 입력해주세요!' }]}>
-                    <TextArea rows={4} style={{ resize: 'none'}}/>
+                    <TextArea rows={4} placeholder="설명을 입력해주세요" style={{ resize: 'none' }} />
                 </Form.Item>
-                <Form.Item label="오픈채팅방" name="chatUrl" rules={[{ required: false, type: 'url', message: '유효한 URL을 입력해주세요!' }]}>
-                    <Input />
+
+                <Form.Item label="오픈채팅방" name="chatUrl" rules={[{ type: 'url', message: '유효한 URL을 입력해주세요!' }]}>
+                    <Input placeholder="오픈채팅방 URL을 입력해주세요" />
                 </Form.Item>
-                <Form.Item label="정원 (2~60)" name="capacity" rules={[{ required: true, message: '정원을 입력해주세요!' }]}>
-                    <InputNumber min={1} />
-                </Form.Item>
-                <Form.Item wrapperCol={{ span: 14, offset: 4 }}>
+
+                <Form.Item>
                     <div className={styles.submitBtnContainer}>
-                    <Button type="primary" htmlType="submit" className={styles.submitBtn}>
-                        제출
-                    </Button>
+                        <Button type="primary" htmlType="submit" className={styles.submitBtn}>
+                            제출
+                        </Button>
                     </div>
                 </Form.Item>
             </Form>

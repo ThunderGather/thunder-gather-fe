@@ -39,7 +39,9 @@
 :root {
     --PrimaryColor: #F1EFEB;
     --BlackColor: #291B12;
+    --YellowColor: #F7DF66;
 
+    --BlackText: #150902;
     --BrownText: #9E9583;
 }
 

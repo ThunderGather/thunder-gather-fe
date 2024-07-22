@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Home.module.css';
 import { useNavigate } from 'react-router-dom';
+import CardItem from "../components/card/CardItem.tsx";
 // import Footer from "../components/layout/Footer.tsx";
 
 const categories = [
@@ -46,10 +47,11 @@ const Home: React.FC = () => {
                 <div className={styles.titleContainer}>
                     <span className={styles.title}>오늘의 번개⚡️</span>
                 </div>
+                <div className={styles.todayList}>
+                    <CardItem />
+                    <CardItem />
+                </div>
             </div>
-            {/*<div className={styles.footerContainer}>*/}
-            {/*    <Footer/>*/}
-            {/*</div>*/}
         </div>
     );
 };
