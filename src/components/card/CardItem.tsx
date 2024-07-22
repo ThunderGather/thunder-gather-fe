@@ -50,7 +50,7 @@ const CardItem: React.FC = () => {
             <button className={styles.button} onClick={showDrawer}><span>more</span></button>
         </div>
             <Drawer
-                title="Post Detail"
+                title="번개 자세히 보기"
                 placement="bottom"
                 closable={true}
                 onClose={closeDrawer}
