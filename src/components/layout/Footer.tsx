@@ -4,7 +4,7 @@ import React from "react";
 import { TbHome } from "react-icons/tb";
 import { TbCategory } from "react-icons/tb";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
-import { BsPerson } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Footer: React.FC = () => {
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
             <div className={styles.menuCircle} style={circleStyle('/post/create')}></div>
           </div>
           <div className={styles.menuNavBar} onClick={() => navigate('/profile')} style={iconStyle('/profile')}>
-            <BsPerson className={styles.icon}/>
+            <CgProfile className={styles.icon}/>
             <div className={styles.menuCircle} style={circleStyle('/profile')}></div>
           </div>
         </nav>

@@ -6,7 +6,7 @@ const Profile: React.FC = () => {
     return (
         <div className={styles.container}>
             <div className={styles.headerContainer}>
-                <Header title='나의 번개'/>
+                <Header title='나의 번개' showLeft='no' showRight='yes'/>
             </div>
         </div>
     );

@@ -2,16 +2,42 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
-    background-color: red;
-    width: 100vw;
+    padding: 20px 32px;
+    background-color: white;
+
+    /*border-right: 1px solid #E4E4E4;*/
+    /*border-left: 1px solid #E4E4E4;*/
+    border-bottom: 1px solid #E4E4E4;
+
+    width: 100%;
     max-width: 600px;
     z-index: 100;
+
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .leftIcon, .rightIcon {
     flex: 0 0 auto;
+    background-color: var(--PrimaryColor);
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
 }
+
+.leftIcon {
+    font-size: 23px;
+}
+
+.rightIcon {
+    font-size: 28px;
+}
+
 
 .title {
     flex: 1;

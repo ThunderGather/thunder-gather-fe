@@ -3,7 +3,7 @@
 
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
-    height: 54px;
+    height: 56px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -30,7 +30,7 @@
 
 
 .icon {
-    font-size: 24px;
+    font-size: 25px;
     cursor: pointer;
     /*transition: color 0.3s ease;*/
 }
