@@ -39,7 +39,7 @@ const Login: React.FC = () => {
                 </div>
                 <Form
                     name="basic"
-                    style={{ maxWidth: 600, width: '70%' }}
+                    style={{ maxWidth: 700, width: '80%' }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}

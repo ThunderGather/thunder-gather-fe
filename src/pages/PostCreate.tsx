@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { Form, Input, DatePicker, Select, InputNumber, Button, Row, Col } from 'antd';
 import styles from './PostCreate.module.css';
-import Header from "../components/layout/Header.tsx";
+import Header from "../components/layout/Header";
 
 const { TextArea } = Input;
+const { Option } = Select;
+
+type SizeType = 'small' | 'middle' | 'large';
 
 const PostCreate: React.FC = () => {
     const [form] = Form.useForm();
-    const [componentSize, setComponentSize] = useState<'default'>('default');
+    const [componentSize, setComponentSize] = useState<SizeType>('middle'); // Changed default size to 'middle'
 
-    const onFormLayoutChange = ({ size }: { size: 'default' }) => {
+    const onFormLayoutChange = ({ size }: { size: SizeType }) => {
         setComponentSize(size);
     };
 
@@ -22,7 +25,7 @@ const PostCreate: React.FC = () => {
             <Header title='번개 생성' showLeft='no' showRight='yes' />
             <Form
                 form={form}
-                layout="vertical" // Changed layout to vertical
+                layout="vertical"
                 initialValues={{ size: componentSize }}
                 onValuesChange={onFormLayoutChange}
                 size={componentSize}
@@ -36,7 +39,7 @@ const PostCreate: React.FC = () => {
                 <Row gutter={16}>
                     <Col span={12}>
                         <Form.Item label="날짜" name="date" rules={[{ required: true, message: '날짜를 선택해주세요!' }]}>
-                            <DatePicker style={{ width: '100%' }} />
+                            <DatePicker style={{ width: '100%' }} placeholder="날짜를 선택해주세요"/>
                         </Form.Item>
                     </Col>
                     <Col span={12}>
@@ -48,14 +51,14 @@ const PostCreate: React.FC = () => {
 
                 <Form.Item label="카테고리" name="category" rules={[{ required: true, message: '카테고리를 선택해주세요!' }]}>
                     <Select placeholder="카테고리를 선택해주세요">
-                        <Select.Option value="밥">밥</Select.Option>
-                        <Select.Option value="카페">카페</Select.Option>
-                        <Select.Option value="술">술</Select.Option>
-                        <Select.Option value="운동">운동</Select.Option>
-                        <Select.Option value="출사">출사</Select.Option>
-                        <Select.Option value="산책">산책</Select.Option>
-                        <Select.Option value="노래방">노래방</Select.Option>
-                        <Select.Option value="코딩">코딩</Select.Option>
+                        <Option value="밥">밥</Option>
+                        <Option value="카페">카페</Option>
+                        <Option value="술">술</Option>
+                        <Option value="운동">운동</Option>
+                        <Option value="출사">출사</Option>
+                        <Option value="산책">산책</Option>
+                        <Option value="노래방">노래방</Option>
+                        <Option value="코딩">코딩</Option>
                     </Select>
                 </Form.Item>
 

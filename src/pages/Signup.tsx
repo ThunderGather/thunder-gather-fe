@@ -13,15 +13,13 @@ type SignupFieldType = {
     nickname?: string;
 };
 
-type FileType = Parameters<UploadProps['beforeUpload']>[0];
-
-const getBase64 = (img: FileType, callback: (url: string) => void) => {
+const getBase64 = (img: File, callback: (url: string) => void) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result as string));
     reader.readAsDataURL(img);
 };
 
-const beforeUpload = (file: FileType) => {
+const beforeUpload = (file: File) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
         message.error('JPG/PNG 파일만 올려주세요!');
@@ -48,7 +46,7 @@ const Signup: React.FC = () => {
             return;
         }
         if (info.file.status === 'done') {
-            getBase64(info.file.originFileObj as FileType, (url) => {
+            getBase64(info.file.originFileObj as File, (url) => {
                 setLoading(false);
                 setImageUrl(url);
             });
@@ -83,7 +81,7 @@ const Signup: React.FC = () => {
                 </div>
                 <Form
                     name="signup"
-                    style={{ maxWidth: 600, width: '70%' }}
+                    style={{ maxWidth: 700, width: '80%' }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
@@ -91,19 +89,19 @@ const Signup: React.FC = () => {
                 >
                     <div className={styles.formItem}>
                         <div className={styles.avatarUploader}>
-                        <Form.Item name="avatar">
-                            <Upload
-                                name="avatar"
-                                listType="picture-circle"
-                                className={styles.avatarUploader}
-                                showUploadList={false}
-                                action="https://jsonplaceholder.typicode.com/posts/"
-                                beforeUpload={beforeUpload}
-                                onChange={handleChange}
-                            >
-                                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-                            </Upload>
-                        </Form.Item>
+                            <Form.Item name="avatar">
+                                <Upload
+                                    name="avatar"
+                                    listType="picture-circle"
+                                    className={styles.avatarUploader}
+                                    showUploadList={false}
+                                    action="https://jsonplaceholder.typicode.com/posts/"
+                                    beforeUpload={beforeUpload}
+                                    onChange={handleChange}
+                                >
+                                    {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                                </Upload>
+                            </Form.Item>
                         </div>
                     </div>
 
