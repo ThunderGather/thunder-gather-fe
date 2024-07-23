@@ -114,7 +114,7 @@
 }
 
 /* 반응형 디자인을 위한 미디어 쿼리 추가 */
-@media (max-width: 410px) {
+@media (max-width: 430px) {
     .categoryContainer {
         grid-template-columns: repeat(3, 1fr);
         grid-column-gap: 8px;

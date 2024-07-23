@@ -168,7 +168,7 @@ const Signup: React.FC = () => {
                             <Tooltip title="영어이름.성 으로 입력해주세요.">
 
                             <Input
-                                placeholder="닉네임"
+                                placeholder="닉네임  (예시) jeff.lim"
                                 className={styles.inputField}
                             />
                             </Tooltip>

@@ -49,7 +49,7 @@
     padding: 10px;
 }
 
-.datePickerField, .inputNumberField, .selectField {
+.datePickerField, .timePickerField, .inputNumberField, .selectField {
     height: 50px;
     font-size: 14px;
     display: flex;
