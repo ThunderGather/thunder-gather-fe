@@ -1,0 +1,47 @@
+.container {
+    width: 100%;
+    min-height: 40px;
+    /*background-color: red;*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 20px;
+
+}
+
+.avatar {
+
+}
+
+.avatar img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid black;
+    margin: 0;
+}
+
+.name {
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.hostTag {
+    width: 60px;
+    height: 25px;
+    background-color: #8FCAE6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 4%;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.icon {
+    color: #E2C017;
+}

@@ -55,7 +55,20 @@ const CardItem: React.FC = () => {
                 closable={true}
                 onClose={closeDrawer}
                 open={drawerVisible}
-                height="90%" // Adjust height as needed
+                height="90%"
+                style={{
+                    maxWidth: '600px',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    // boxShadow: 'none',
+                    // height: 'auto',
+                }}
+                bodyStyle={{
+                    // maxHeight: '80vh',
+                    overflowY: 'auto',
+                }}
             >
                 <CardDetail />
             </Drawer>
