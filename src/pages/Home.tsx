@@ -5,14 +5,14 @@ import CardItem from "../components/card/CardItem.tsx";
 // import Footer from "../components/layout/Footer.tsx";
 
 const categories = [
-    { id: 1, name: '밥', imgSrc: '/category/1.png', path: '/category/1' },
-    { id: 2, name: '카페', imgSrc: '/category/2.png', path: '/category/2' },
-    { id: 3, name: '술', imgSrc: '/category/3.png', path: '/category/3' },
-    { id: 4, name: '운동', imgSrc: 'category/4.png', path: '/category/4' },
-    { id: 5, name: '출사', imgSrc: '/category/5.png', path: '/category/5' },
-    { id: 6, name: '산책', imgSrc: '/category/6.png', path: '/category/6' },
-    { id: 7, name: '노래방', imgSrc: '/category/7.png', path: '/category/7' },
-    { id: 8, name: '코딩', imgSrc: '/category/8.png', path: '/category/8' }
+    { id: 1, name: '밥', imgSrc: '/category/1.png', path: '/post/1' },
+    { id: 2, name: '카페', imgSrc: '/category/2.png', path: '/post/2' },
+    { id: 3, name: '술', imgSrc: '/category/3.png', path: '/post/3' },
+    { id: 4, name: '운동', imgSrc: 'category/4.png', path: '/post/4' },
+    { id: 5, name: '출사', imgSrc: '/category/5.png', path: '/post/5' },
+    { id: 6, name: '산책', imgSrc: '/category/6.png', path: '/post/6' },
+    { id: 7, name: '노래방', imgSrc: '/category/7.png', path: '/post/7' },
+    { id: 8, name: '코딩', imgSrc: '/category/8.png', path: '/post/8' }
 ];
 
 

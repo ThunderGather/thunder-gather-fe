@@ -20,7 +20,7 @@ const Post: React.FC = () => {
                 <div className={styles.filterContainer}>
                     <Space direction="vertical" size={12}>
                         <RangePicker
-                            defaultValue={[dayjs('2015/01/01', dateFormat), dayjs('2015/01/01', dateFormat)]}
+                            defaultValue={[dayjs('2024/08/01', dateFormat), dayjs('2024/08/01', dateFormat)]}
                             format={dateFormat}
                         />
                     </Space>

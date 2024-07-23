@@ -24,6 +24,47 @@
     /* Add other styles as needed */
 }
 
+.topContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btnContainer {
+
+}
+
+.btnContainer button{
+    margin-right: 10px;
+    width: 45px;
+    height: 25px;
+    font-size: 14px;
+    /*background-color: #8FCAE6;*/
+    background-color: white;
+    border: 1.3px solid black;
+    border-radius: 5px;
+}
+
+/*.btnContainer button:hover{*/
+/*    background: #f7d874;*/
+/*    color: #fac100;*/
+/*    box-shadow: 0 0 5px #fac100,*/
+/*    0 0 4px #fac100,*/
+/*    0 0 30px #fac100,*/
+/*    0 0 60px #fac100;*/
+/*}*/
+
+/* light on hover with a simple box-shadow */
+.button:hover {
+    background: #f7d874;
+    color: #fac100;
+    box-shadow: 0 0 10px #fac100,
+    0 0 25px #fac100,
+    0 0 50px #fac100,
+    0 0 100px #fac100;
+
+}
+
 .tag {
     width: 50px;
     height: 22px;
@@ -55,7 +96,7 @@
 }
 
 .map {
-    width: 90%;
+    width: 95%;
     max-width: 600px;
     height: 250px;
     background-color: lightgray;
@@ -66,7 +107,30 @@
 
 .description {
     font-size: 16px;
+}
 
+.joinBtnContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.joinBtn {
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: var(--YellowColor);
+}
+
+.joinBtn:hover{
+    background: #f7d874;
+    color: #fac100;
+    box-shadow: 0 0 5px #fac100,
+    0 0 4px #fac100,
+    0 0 30px #fac100,
+    0 0 60px #fac100;
 }
 
 .container hr {

@@ -5,7 +5,15 @@ import CardParticipant from "./CardParticipant.tsx";
 const CardDetail: React.FC = () => {
     return (
         <div className={styles.container}>
-            <div className={styles.tag}>카페</div>
+            <div className={styles.topContainer}>
+                <div className={styles.tag}>카페</div>
+                <div className={styles.btnContainer}>
+                    <button className={styles.editBtn}>수정</button>
+                    <button className={styles.deleteBtn}>삭제</button>
+                </div>
+
+            </div>
+
             <h2 className={styles.title}>스타벅스 카공팸 모집합니다</h2>
             <div className={styles.detailGroup}>
                 <span style={{color: '#C9C3B6'}}>일시</span>
@@ -28,9 +36,12 @@ const CardDetail: React.FC = () => {
                 스타벅스에서 스근하게 코딩할사람 모집합니다~~
                 4시간정도 공부하다가 저녁도 같이 먹읍쉬다
             </div>
-            <hr />
+            <div className={styles.joinBtnContainer}>
+                <button className={styles.joinBtn}>번개 참여</button>
+            </div>
+            <hr/>
             <div className={styles.participantList}>
-                <h2 className={styles.title}>참여멤버 (4/5)</h2>
+                <h2 className={styles.title}>번개 멤버 (4/5)</h2>
                 <CardParticipant imgSrc="/images/derek.jpeg" name="derek.yoo" hostTag={true} />
                 <CardParticipant imgSrc="/images/eric.jpeg" name="eric.shin"/>
                 <CardParticipant imgSrc="/images/eric.jpeg" name="eric.shin"/>
