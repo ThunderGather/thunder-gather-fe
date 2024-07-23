@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, DatePicker, Select, InputNumber, Button, Row, Col } from 'antd';
+import { Form, Input, DatePicker, Select, InputNumber, Row, Col, Button, Checkbox } from 'antd';
 import styles from './PostCreate.module.css';
 import Header from "../components/layout/Header";
 import { FaBoltLightning } from "react-icons/fa6";
@@ -66,6 +66,19 @@ const PostCreate: React.FC = () => {
                 <Form.Item label="설명" name="description" rules={[{ required: true, message: '설명을 입력해주세요!' }]}>
                     <TextArea className={styles.textAreaField} rows={4} placeholder="설명을 입력해주세요" style={{ resize: 'none' }} />
                 </Form.Item>
+
+                <Row gutter={16} align="middle">
+                    <Col span={16}>
+                        <Form.Item label="위치" name="location" rules={[{ required: true, message: '위치를 입력해주세요!' }]}>
+                            <Input className={styles.inputField} placeholder="위치를 입력해주세요" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item name="isOnline" valuePropName="checked" style={{ marginTop: '32px' }}>
+                            <Checkbox>온라인</Checkbox>
+                        </Form.Item>
+                    </Col>
+                </Row>
 
                 <Form.Item label="오픈채팅방" name="chatUrl" rules={[{ type: 'url', message: '유효한 URL을 입력해주세요!' }]}>
                     <Input className={styles.inputField} placeholder="오픈채팅방 URL을 입력해주세요" />

@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.container Button:hover {
+        background-color: #DFD7C5;
+}
+
 .headerContainer {
     position: fixed;
     top: 0;

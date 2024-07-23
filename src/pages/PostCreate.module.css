@@ -28,6 +28,16 @@
     font-weight: 500;
 }
 
+.submitBtn:hover  {
+    background-color: #f7d874;
+    color: #fac100;
+    box-shadow: 0 0 5px #fac100,
+    0 0 4px #fac100,
+    0 0 30px #fac100,
+    0 0 60px #fac100;
+    border: none;
+}
+
 .inputField {
     height: 50px;
     font-size: 14px;

@@ -61,6 +61,17 @@
     margin-top: 10px;
 }
 
+.submitBtn:hover {
+    background: #f7d874;
+    color: #fac100;
+    box-shadow: 0 0 5px #fac100,
+    0 0 4px #fac100,
+    0 0 30px #fac100,
+    0 0 60px #fac100;
+    border: none;
+}
+
+
 .loginLink {
     font-size: 14px;
     margin-top: 18px;

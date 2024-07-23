@@ -13,33 +13,58 @@
 
 .topContainer {
     background-color: white;
-    height: 130px;
+    min-height: 200px;
     width: 100%;
     max-width: 600px;
-    /*box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;*/
-    /*border-right: 1px solid #E4E4E4;*/
-    /*border-left: 1px solid #E4E4E4;*/
     box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
     position: fixed;
     display: flex;
     flex-direction: column;
-    /*justify-content: flex-end;*/
-    top: 0;
-    z-index: 1000;
+    justify-content: flex-start;
+    top: -45px;
+    z-index: 100;
 
 }
 
 .filterContainer {
-    width: 80%;
+    width: 90%;
     height: 30%;
     /*background-color: red;*/
     position: absolute;
-    bottom: 12px;
+    bottom: 18px;
     right: 12px;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    /*justify-content: center;*/
+    /*justify-content: flex-end;*/
         /*align-items: flex-end;*/
+    /*background-color: red;*/
 }
+
+.dataPicker {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+
+.categoryPicker {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.Label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.Label span{
+    margin-left: 3px;
+}
+
 
 .itemContainer {
     width: 90%;
@@ -49,7 +74,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin: 140px 0 55px 0;
+    margin: 180px 0 55px 0;
     /*background-color: red;*/
     overflow-y: auto;
     /*padding-top: 280px;*/
@@ -70,4 +95,25 @@
     /*background-color: blue;*/
     font-size: 18px;
     margin-bottom: 5px;
+}
+
+.datePicker {
+    width: 180px;
+    height: 32px;
+    /*color: red;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid #D4D4D4;
+    border-radius: 6px;
+    text-align: left;
+    padding-left: 10px;
+    font-size: 12px;
+
+}
+
+.datePicker:focus {
+    /*border: none;*/
+    outline: none;
 }

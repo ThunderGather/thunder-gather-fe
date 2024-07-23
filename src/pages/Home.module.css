@@ -50,28 +50,6 @@
 }
 
 
-
-/*.categoryButton {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    align-items: center;*/
-/*    padding: 4px;*/
-/*    background-color: #F1EFEB;*/
-/*    color: #291B12;*/
-/*    border: none;*/
-/*    border-radius: 6px;*/
-/*    cursor: pointer;*/
-/*    transition: background-color 0.3s ease;*/
-/*    text-align: center;*/
-/*   */
-/*}*/
-
-
-/*.categoryButton:hover {*/
-/*    background-color: #F7DF66;*/
-/*    color: #291B12;*/
-/*}*/
-
 .categoryImage {
     width: 70%;
     height: auto;
@@ -91,8 +69,8 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-align: center;
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     /*overflow-y: auto;*/
     /*border: 2px solid #7291BE;*/
     box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -104,7 +82,7 @@
 
 .categoryName {
     margin-top: 1.5px;
-    font-size: 13.5px;
+    font-size: 12px;
 }
 
 
@@ -135,42 +113,29 @@
     overflow-y: auto;
 }
 
-/*.footerContainer {*/
-/*    width: 100%;*/
-/*}*/
+/* 반응형 디자인을 위한 미디어 쿼리 추가 */
+@media (max-width: 410px) {
+    .categoryContainer {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 8px;
+        grid-row-gap: 8px;
+    }
 
+    .titleContainer {
+        font-size: 18px;
+        margin-left: 20px;
+    }
 
-/*!* Media queries for responsiveness *!*/
-/*@media (max-width: 768px) {*/
-/*    .container {*/
-/*        padding: 0 8px;*/
-/*    }*/
+    .imgContainer {
+        width: 60px;
+        height: 60px;
+    }
 
-/*    .categoryContainer {*/
-/*        !*grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));*!*/
-/*    }*/
+    .categoryName {
+        font-size: 12px;
+    }
 
-/*    .imgContainer {*/
-/*        width: 60px;*/
-/*        height: 60px;*/
-/*    }*/
-
-/*    .title {*/
-/*        font-size: 20px;*/
-/*    }*/
-/*}*/
-
-/*@media (max-width: 480px) {*/
-/*    .categoryContainer {*/
-/*        !*grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));*!*/
-/*    }*/
-
-/*    .imgContainer {*/
-/*        width: 50px;*/
-/*        height: 50px;*/
-/*    }*/
-
-/*    .title {*/
-/*        font-size: 18px;*/
-/*    }*/
-/*}*/
+    .todayList {
+        width: 100%;
+    }
+}
