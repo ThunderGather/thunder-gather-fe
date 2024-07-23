@@ -86,3 +86,24 @@
     height: 45px;
     font-size: 14px;
 }
+
+.nicknameGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* 세로 중앙 정렬 */
+    background-color: red;
+}
+
+.inputFieldNick {
+    height: 45px;
+    font-size: 14px;
+    margin: 0;
+    flex-grow: 1; /* 가로 길이를 부모 컨테이너에 맞춰 확장 */
+}
+
+.helperIcon {
+    font-size: 23px;
+    margin-left: 10px; /* margin-left 값을 조정하여 세로 중앙 정렬 조정 */
+    background-color: black;
+}

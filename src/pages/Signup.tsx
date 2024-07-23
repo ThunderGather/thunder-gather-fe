@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoCloseOutline } from "react-icons/io5";
 import { LockOutlined, UserOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Upload, message } from 'antd';
+import { Button, Form, Input, Upload, message, Tooltip } from 'antd';
 import type { UploadProps } from 'antd';
 import styles from './Signup.module.css';
+
 
 type SignupFieldType = {
     username?: string;
@@ -148,11 +149,14 @@ const Signup: React.FC = () => {
                                 }),
                             ]}
                         >
-                            <Input.Password
-                                prefix={<LockOutlined className="site-form-item-icon" />}
-                                placeholder="비밀번호 확인"
-                                className={styles.inputField}
-                            />
+                            <div className={styles.passwordConfirmGroup}>
+                                <Input.Password
+                                    prefix={<LockOutlined className="site-form-item-icon" />}
+                                    placeholder="비밀번호 확인"
+                                    className={styles.inputField}
+                                />
+                            </div>
+
                         </Form.Item>
                     </div>
 
@@ -161,10 +165,13 @@ const Signup: React.FC = () => {
                             name="nickname"
                             rules={[{ required: true, message: '닉네임을 입력해주세요.' }]}
                         >
+                            <Tooltip title="영어이름.성 으로 입력해주세요.">
+
                             <Input
                                 placeholder="닉네임"
                                 className={styles.inputField}
                             />
+                            </Tooltip>
                         </Form.Item>
                     </div>
 
