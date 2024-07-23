@@ -1,0 +1,68 @@
+.container {
+    /*padding: 25px;*/
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*overflow-y: auto;*/
+
+
+}
+
+.topContainer {
+    background-color: white;
+    height: 130px;
+    width: 100%;
+    /*box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;*/
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: flex-end;*/
+    top: 0;
+    z-index: 1000;
+
+
+}
+
+.filterContainer {
+    width: 80%;
+    height: 30%;
+    /*background-color: red;*/
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: flex-end;
+        /*align-items: flex-end;*/
+}
+
+.itemContainer {
+    width: 90%;
+    /*height: 100px;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 140px 0 70px 0;
+    /*background-color: red;*/
+    /*overflow-y: auto;*/
+
+}
+
+.dailyGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.groupLabel {
+    width: 90%;
+    text-align: left;
+    /*background-color: blue;*/
+    font-size: 18px;
+    margin-bottom: 5px;
+}

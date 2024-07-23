@@ -1,0 +1,87 @@
+.container {
+    width: 100%;
+    padding: 30px;
+}
+
+.closeBtnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    /*width: 100vw;*/
+    /*background-color: red;*/
+}
+
+.closeBtn {
+    flex: 0 0 auto;
+    background-color: var(--PrimaryColor);
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 23px;
+}
+
+.logoContainer img {
+    width: 150px;
+    margin-bottom: 40px;
+}
+
+.loginForm {
+    margin-top: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formLabel {
+    font-size: 13px;
+}
+
+/*.formTitle {*/
+/*    !*background-color: red;*!*/
+/*    width: 100%;*/
+/*    text-align: center;*/
+/*    font-size: 26px;*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 40px;*/
+/*}*/
+
+
+.submitBtnContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.submitBtn {
+    height: 45px;
+    width: 130px;
+    border-radius: 10px;
+    background-color: var(--YellowColor);
+    color: #000000;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.signupLink {
+    font-size: 14px;
+    margin-top: 18px;
+}
+
+.signupLinkSpan {
+    color: #E2C017;
+    /*font-weight: bold;*/
+}
+
+.inputField {
+    height: 50px; /* Adjust this value as needed */
+    font-size: 16px; /* Adjust the font size if needed */
+}
+
+
