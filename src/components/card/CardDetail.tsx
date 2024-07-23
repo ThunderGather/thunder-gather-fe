@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './CardDetail.module.css';
 import CardParticipant from "./CardParticipant.tsx";
+import { FaBoltLightning } from "react-icons/fa6";
+import { Tooltip } from 'antd';
 
 const CardDetail: React.FC = () => {
     return (
@@ -37,12 +39,19 @@ const CardDetail: React.FC = () => {
                 4시간정도 공부하다가 저녁도 같이 먹읍쉬다
             </div>
             <div className={styles.joinBtnContainer}>
-                <button className={styles.joinBtn}>번개 참여</button>
+
             </div>
             <hr/>
             <div className={styles.participantList}>
-                <h2 className={styles.title}>번개 멤버 (4/5)</h2>
-                <CardParticipant imgSrc="/images/derek.jpeg" name="derek.yoo" hostTag={true} />
+                <div className={styles.partiTopContainer}>
+                    <h2 className={styles.title}>번개 멤버 (4/5)</h2>
+                    <Tooltip title="번개 참여">
+                    <button className={styles.joinBtn}><FaBoltLightning className={styles.icon}/>
+                    </button>
+                    </Tooltip>
+                </div>
+
+                <CardParticipant imgSrc="/images/derek.jpeg" name="derek.yoo" hostTag={true}/>
                 <CardParticipant imgSrc="/images/eric.jpeg" name="eric.shin"/>
                 <CardParticipant imgSrc="/images/eric.jpeg" name="eric.shin"/>
                 <CardParticipant imgSrc="/images/eric.jpeg" name="eric.shin"/>

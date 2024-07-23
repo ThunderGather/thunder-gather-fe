@@ -19,6 +19,7 @@
     width: 90%;
 }
 
+
 /*회원가입 및 로그인 버튼*/
 .signIn {
     width: 100%;
@@ -30,6 +31,8 @@
     background-color: var(--PrimaryColor);
     position: relative;
     margin-bottom: 10px;
+    /*border: 2px solid #2C3D55;*/
+    box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 .signInTitle {
     font-size: 20px;
@@ -65,11 +68,14 @@
     border-radius: 12px;
     background-color: var(--PrimaryColor);
     position: relative;
+    /*border: 2px solid #2C3D55;*/
+    box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .feedbackTitle {
     font-size: 20px;
     font-weight: 500;
+
 }
 
 .bottomContainer {
