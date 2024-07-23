@@ -18,6 +18,7 @@
 /*  }*/
 
 
+
 .container {
     /*width: 100%;*/
     min-width: 400px;
@@ -34,6 +35,18 @@
     position: relative;
     /*justify-content: center;*/
     height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: flex-start;
+}
+
+.routesContainer {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: flex-start;*/
+    /*align-items: flex-start;*/
+    overflow-y: auto;
+    width: 100%;
 }
 
 

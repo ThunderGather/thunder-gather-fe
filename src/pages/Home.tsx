@@ -53,7 +53,7 @@ const Home: React.FC = () => {
                     <CardItem />
                     <CardItem />
                     <CardItem />
-                    {/*<CardItem />*/}
+                    <CardItem />
                     {/*<CardItem />*/}
                 </div>
             </div>

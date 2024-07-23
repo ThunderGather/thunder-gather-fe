@@ -5,8 +5,8 @@
     padding: 15px 28px;
     background-color: white;
 
-    /*border-right: 1px solid #E4E4E4;*/
-    /*border-left: 1px solid #E4E4E4;*/
+    border-right: 1px solid #E4E4E4;
+    border-left: 1px solid #E4E4E4;
     border-bottom: 1px solid #E4E4E4;
 
     width: 100%;
@@ -20,6 +20,9 @@
 
 .noLine {
     border-bottom: none;
+    border-right: none;
+    border-left: none
+
 }
 
 .leftIcon, .rightIcon {

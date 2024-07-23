@@ -47,7 +47,8 @@ const Post: React.FC = () => {
                     </div>
                     <CardItem/>
                     <CardItem/>
-
+                    <CardItem/>
+                    {/*<CardItem/>*/}
                 </div>
             </div>
         </div>

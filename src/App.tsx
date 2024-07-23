@@ -19,6 +19,7 @@ function App() {
         <Router>
             <div className={styles.container}>
                 {/*<Layout>*/}
+                <div className={styles.routesContainer}>
                 <Routes>
                     <Route path={URL.home} element={<Home/>}/>
                     <Route path={URL.post} element={<Post/>}/>
@@ -28,6 +29,7 @@ function App() {
                     <Route path={URL.createPost} element={<PostCreate/>}/>
                     {/* Add more routes here as needed */}
                 </Routes>
+                </div>
                 {/*</Layout>*/}
                 <div className={styles.footerContainer}>
                     <Footer/>

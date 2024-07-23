@@ -11,7 +11,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <>
     <div className={styles.layout}>
       <main className={styles.main}>{children}</main>
-
     </div>
       </>
   );
