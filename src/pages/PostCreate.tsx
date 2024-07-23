@@ -45,7 +45,7 @@ const PostCreate: React.FC = () => {
                     </Col>
                     <Col span={12}>
                         <Form.Item label="시간" name="time" rules={[{ required: true, message: '시간을 선택해주세요!' }]}>
-                            <TimePicker className={styles.timePickerField} format="HH:mm" style={{ width: '100%' }} placeholder="시간을 선택해주세요" />
+                            <TimePicker className={styles.timePickerField} format="h:mm a" style={{ width: '100%' }} placeholder="시간을 선택해주세요" />
                         </Form.Item>
                     </Col>
                 </Row>

@@ -2,8 +2,10 @@ import React from 'react';
 import styles from './CardDetail.module.css';
 import CardParticipant from "./CardParticipant.tsx";
 import { FaBoltLightning } from "react-icons/fa6";
-import { Tooltip, FloatButton } from 'antd';
+import { Tooltip, FloatButton, Typography } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+
+const { Paragraph } = Typography;
 
 const CardDetail: React.FC = () => {
     return (
@@ -11,17 +13,6 @@ const CardDetail: React.FC = () => {
             <div className={styles.topContainer}>
                 <div className={styles.tag}>카페</div>
                 <div className={styles.btnContainer}>
-                    {/*<FloatButton.Group*/}
-                    {/*    shape="circle" // Changed shape to "circle"*/}
-                    {/*    trigger="click"*/}
-                    {/*    type="primary"*/}
-                    {/*    style={{ right: 40  }}*/}
-                    {/*    icon={<SnippetsFilled className={styles.floatIcon}/>}*/}
-                    {/*    className={styles.floatButton}*/}
-                    {/*>*/}
-                    {/*    <FloatButton icon={<EditOutlined />} onClick={() => alert("Edit clicked!")} />*/}
-                    {/*    <FloatButton icon={<DeleteOutlined />} onClick={() => alert("Delete clicked!")} />*/}
-                    {/*</FloatButton.Group>*/}
                     <FloatButton.Group shape="square" style={{ right: 40 }}>
                         <FloatButton icon={<DeleteOutlined onClick={() => alert("Delete clicked!")}/>}/>
                         <FloatButton icon={<EditOutlined onClick={() => alert("Edit clicked!")}/>} />
@@ -45,7 +36,7 @@ const CardDetail: React.FC = () => {
             </div>
             <div className={styles.detailGroup}>
                 <span style={{ color: '#C9C3B6' }}>오픈채팅</span>
-                <span>https://www.google.com/</span>
+                <Paragraph copyable={{ tooltips: false }} className={styles.chatLink}>https://www.gle.com/w.google.com/w.googoogle.com/w.google.comhttps://www.google.com</Paragraph>
             </div>
             <div className={styles.map}>지도 지도 지도 지도 </div>
             <div className={styles.description}>
