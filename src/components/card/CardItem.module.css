@@ -94,3 +94,10 @@
 /*    font-size: 28px;*/
 /*    color: #2C3D55;*/
 /*}*/
+
+@media (max-width: 430px) {
+    .container {
+        width: 87%;
+    }
+
+}

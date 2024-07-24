@@ -27,6 +27,10 @@ const Header: React.FC<HeaderProps> = ({
         navigate(-1); //뒤로가기
     };
 
+    const handleClose = () => {
+        navigate('/home');
+    };
+
     return (
         <div className={`${styles.container} ${showLine === 'no' ? styles.noLine : ''}`}>
             {showLeft === 'yes' && (
@@ -38,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({
                 {title}
             </div>
             {showRight === 'yes' && (
-                <div className={styles.rightIcon} onClick={handleBack}>
+                <div className={styles.rightIcon} onClick={handleClose}>
                     <IoCloseOutline/>
                 </div>
             )}
