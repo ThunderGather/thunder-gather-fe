@@ -73,21 +73,21 @@ const Post: React.FC = () => {
                 <Header title='모든 번개 보기' showLeft='yes' showRight='no' showLine='no'/>
                 <div className={styles.filterContainer}>
                     <div className={styles.dataPicker}>
-                    <div className={styles.Label}>
-                        <LuCalendarDays /><span>날짜</span>
-                    </div>
-                    <ReactDatePicker
-                        selectsRange={true}
-                        startDate={startDate}
-                        endDate={endDate}
-                        onChange={(update: [Date | null, Date | null]) => {
-                            setDateRange([update[0] ?? undefined, update[1] ?? undefined]);
-                        }}
-                        withPortal
-                        dateFormat="yyyy/MM/dd"
-                        className={styles.datePicker}
-                        placeholderText="날짜를 선택해주세요"
-                    />
+                    {/*<div className={styles.Label}>*/}
+                    {/*    <LuCalendarDays /><span>날짜</span>*/}
+                    {/*</div>*/}
+                    {/*<ReactDatePicker*/}
+                    {/*    selectsRange={true}*/}
+                    {/*    startDate={startDate}*/}
+                    {/*    endDate={endDate}*/}
+                    {/*    onChange={(update: [Date | null, Date | null]) => {*/}
+                    {/*        setDateRange([update[0] ?? undefined, update[1] ?? undefined]);*/}
+                    {/*    }}*/}
+                    {/*    withPortal*/}
+                    {/*    dateFormat="yyyy/MM/dd"*/}
+                    {/*    className={styles.datePicker}*/}
+                    {/*    placeholderText="날짜를 선택해주세요"*/}
+                    {/*/>*/}
                     </div>
                     <div className={styles.categoryPicker}>
                         <div className={styles.Label}>

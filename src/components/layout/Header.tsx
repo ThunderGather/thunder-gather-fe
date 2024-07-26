@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({
     };
 
     const handleClose = () => {
-        navigate('/home');
+        navigate('/');
     };
 
     return (
