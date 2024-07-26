@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Post.module.css';
 import Header from "../components/layout/Header.tsx";
-import ReactDatePicker from 'react-datepicker';
+// import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import CardItem from "../components/card/CardItem.tsx";
-import { LuCalendarDays } from "react-icons/lu";
+// import { LuCalendarDays } from "react-icons/lu";
 import { MdOutlineCategory } from "react-icons/md";
 import { Select, Space } from 'antd';
 
 const Post: React.FC = () => {
-    const [dateRange, setDateRange] = useState<[Date | undefined, Date | undefined]>([undefined, undefined]);
-    const [startDate, endDate] = dateRange;
+    // const [dateRange, setDateRange] = useState<[Date | undefined, Date | undefined]>([undefined, undefined]);
+    // const [startDate, endDate] = dateRange;
     const handleChange = (value: string[]) => {
         console.log(`selected ${value}`);
     };
@@ -53,10 +53,10 @@ const Post: React.FC = () => {
             desc: '산책',
         },
         {
-            label: '노래방',
-            value: '노래방',
-            emoji: '🎤',
-            desc: '노래방',
+            label: '쇼핑',
+            value: '쇼핑',
+            emoji: '🛒',
+            desc: '쇼핑',
         },
         {
             label: '코딩',

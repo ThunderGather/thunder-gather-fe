@@ -11,7 +11,7 @@ const categories = [
     { id: 4, name: '운동', imgSrc: 'category/4.png', path: '/post/4' },
     { id: 5, name: '출사', imgSrc: '/category/5.png', path: '/post/5' },
     { id: 6, name: '산책', imgSrc: '/category/6.png', path: '/post/6' },
-    { id: 7, name: '노래방', imgSrc: '/category/7.png', path: '/post/7' },
+    { id: 7, name: '쇼핑', imgSrc: '/category/7.png', path: '/post/7' },
     { id: 8, name: '코딩', imgSrc: '/category/8.png', path: '/post/8' }
 ];
 

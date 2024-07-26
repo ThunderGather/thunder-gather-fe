@@ -60,7 +60,7 @@ const PostCreate: React.FC = () => {
                                 <Option value="운동">운동</Option>
                                 <Option value="출사">출사</Option>
                                 <Option value="산책">산책</Option>
-                                <Option value="노래방">노래방</Option>
+                                <Option value="쇼핑">쇼핑</Option>
                                 <Option value="코딩">코딩</Option>
                             </Select>
                         </Form.Item>
