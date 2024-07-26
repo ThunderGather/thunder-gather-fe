@@ -117,28 +117,31 @@ const Post: React.FC = () => {
             </div>
             <div className={styles.itemContainer}>
             <div className={styles.dailyGroup}>
-                    <div className={styles.groupLabel}>
-                        8/1 (월)
-                    </div>
                     <CardItem/>
-                </div>
-                <div className={styles.dailyGroup}>
-                    <div className={styles.groupLabel}>
-                        8/2 (화)
-                    </div>
+                    <CardItem/>
+                    <CardItem/>
+                    <CardItem/>
                     <CardItem/>
                     <CardItem/>
                     <CardItem/>
                 </div>
-                <div className={styles.dailyGroup}>
-                    <div className={styles.groupLabel}>
-                        8/3 (수)
-                    </div>
-                    <CardItem/>
-                    <CardItem/>
-                    <CardItem/>
-                    {/*<CardItem/>*/}
-                </div>
+                {/*<div className={styles.dailyGroup}>*/}
+                {/*    <div className={styles.groupLabel}>*/}
+                {/*        8/2 (화)*/}
+                {/*    </div>*/}
+                {/*    <CardItem/>*/}
+                {/*    <CardItem/>*/}
+                {/*    <CardItem/>*/}
+                {/*</div>*/}
+                {/*<div className={styles.dailyGroup}>*/}
+                {/*    <div className={styles.groupLabel}>*/}
+                {/*        8/3 (수)*/}
+                {/*    </div>*/}
+                {/*    <CardItem/>*/}
+                {/*    <CardItem/>*/}
+                {/*    <CardItem/>*/}
+                {/*    /!*<CardItem/>*!/*/}
+                {/*</div>*/}
             </div>
         </div>
     );
