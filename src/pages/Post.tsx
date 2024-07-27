@@ -9,9 +9,10 @@ import { useParams } from 'react-router-dom';
 
 const Post: React.FC = () => {
     const { category } = useParams<{ category: string }>();
-    const [defaultCategory, setDefaultCategory] = useState<string[]>([]);
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
     const handleChange = (value: string[]) => {
+        setSelectedCategories(value);
         console.log(`selected ${value}`);
     };
 
@@ -28,14 +29,14 @@ const Post: React.FC = () => {
 
     useEffect(() => {
         if (category && options.find(option => option.value === category)) {
-            setDefaultCategory([category]);
+            setSelectedCategories([category]);
         }
     }, [category]);
 
     return (
         <div className={styles.container}>
             <div className={styles.topContainer}>
-                <Header title='모든 번개 보기' showLeft='yes' showRight='no' showLine='no'/>
+                <Header title='번개 모음' showLeft='yes' showRight='no' showLine='no'/>
                 <div className={styles.filterContainer}>
                     <div className={styles.dataPicker}></div>
                     <div className={styles.categoryPicker}>
@@ -44,12 +45,13 @@ const Post: React.FC = () => {
                         </div>
                         <Select
                             mode="multiple"
-                            style={{width: '80%', fontSize: '12px', height: '32px' }}
+                            style={{width: '80%', fontSize: '12px', height: '32px'}}
                             className={styles.categorySelect}
                             placeholder="카테고리를 선택해주세요"
-                            value={defaultCategory}
+                            value={selectedCategories}
                             onChange={handleChange}
                             options={options}
+                            optionLabelProp="label"
                             optionRender={(option) => (
                                 <Space>
                                     <span role="img" aria-label={option.data.label}>

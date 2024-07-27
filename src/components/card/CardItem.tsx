@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
+import { useLocation } from 'react-router-dom';
 import styles from './CardItem.module.css';
 import {Avatar, Drawer, Tooltip} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import CardDetail from "./CardDetail.tsx";
+import { FaDeleteLeft } from "react-icons/fa6";
+import AsyncModal from "../modal/Modal.tsx";
 
 const CardItem: React.FC = () => {
+    const [modalOpen, setModalOpen] = useState(false);
     const [drawerVisible, setDrawerVisible] = useState(false);
+    const location = useLocation();
 
     const showDrawer = () => {
         setDrawerVisible(true);
@@ -15,11 +20,31 @@ const CardItem: React.FC = () => {
         setDrawerVisible(false);
     }
 
+    const handleDeleteClick = () => {
+        setModalOpen(true);
+    };
+
+    const handleModalOk = () => {
+        setModalOpen(false);
+    };
+
+    const handleModalCancel = () => {
+        setModalOpen(false);
+    };
+
     return (
         <>
         <div className={styles.container}>
             <div className={styles.detailContainer}>
-                <div className={styles.tag}>카페</div>
+                <div className={styles.detailTopContainer}>
+                    <div className={styles.tag}>카페</div>
+                    {location.pathname === '/profile' && (
+                        <Tooltip title="번개 취소" placement="top">
+                            <button className={styles.deleteIcon} onClick={handleDeleteClick}><FaDeleteLeft /></button>
+                        </Tooltip>
+                    )}
+                </div>
+
                 <div className={styles.title}>스타벅스 카공팸 모집합니다</div>
                 <div className={styles.date}>9/10(월) 10:00 am</div>
                 <div className={styles.people}>
@@ -72,6 +97,12 @@ const CardItem: React.FC = () => {
             >
                 <CardDetail />
             </Drawer>
+            <AsyncModal
+                modalText="번개참여를 취소하시겠습니까?"
+                open={modalOpen}
+                onOk={handleModalOk}
+                onCancel={handleModalCancel}
+            />
         </>
     );
 };
