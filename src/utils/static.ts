@@ -4,5 +4,6 @@ export const URL = {
     signup: '/signup',
     post: `/post`,
     createPost: '/post/create',
-    profile: '/profile'
+    profile: '/profile',
+    postCategory: '/post/:category'
 };

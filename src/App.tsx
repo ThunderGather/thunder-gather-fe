@@ -27,6 +27,7 @@ function App() {
                     <Route path={URL.signin} element={<Login/>}/>
                     <Route path={URL.signup} element={<Signup/>}/>
                     <Route path={URL.createPost} element={<PostCreate/>}/>
+                    <Route path={URL.postCategory} element={<Post />} />
                     {/* Add more routes here as needed */}
                 </Routes>
                 </div>
