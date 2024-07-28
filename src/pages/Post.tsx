@@ -11,10 +11,13 @@ const Post: React.FC = () => {
     const { category } = useParams<{ category: string }>();
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
+
     const handleChange = (value: string[]) => {
         setSelectedCategories(value);
         console.log(`selected ${value}`);
     };
+
+
 
     const options = [
         { label: '밥', value: '밥', emoji: '🍚', desc: '밥' },

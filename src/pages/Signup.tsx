@@ -1,68 +1,92 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoCloseOutline } from "react-icons/io5";
-import { LockOutlined, UserOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Upload, message, Tooltip } from 'antd';
-import type { UploadProps } from 'antd';
-import styles from './Signup.module.css';
+import { LockOutlined, UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Upload, Image, message } from 'antd';
+import type { UploadFile, UploadProps } from 'antd';
+import axios from 'axios';
 
+import styles from './Signup.module.css';
+import { RcFile } from "antd/es/upload";
 
 type SignupFieldType = {
-    username?: string;
+    email?: string;
     password?: string;
     confirmPassword?: string;
     nickname?: string;
 };
 
-const getBase64 = (img: File, callback: (url: string) => void) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result as string));
-    reader.readAsDataURL(img);
-};
-
-const beforeUpload = (file: File) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-        message.error('JPG/PNG 파일만 올려주세요!');
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-        message.error('2MB보다 작은 파일을 올려주세요!');
-    }
-    return isJpgOrPng && isLt2M;
-};
+const getBase64 = (file: RcFile): Promise<string> =>
+    new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = (error) => reject(error);
+    });
 
 const Signup: React.FC = () => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState<string>();
+    const [previewOpen, setPreviewOpen] = useState(false);
+    const [previewImage, setPreviewImage] = useState('');
+    const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const [profileImg, setProfileImg] = useState<UploadFile | null>(null);
 
     const handleProfile = () => {
         navigate('/profile');
     };
 
-    const handleChange: UploadProps['onChange'] = (info) => {
-        if (info.file.status === 'uploading') {
-            setLoading(true);
-            return;
+    const handlePreview = async (file: UploadFile) => {
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj as RcFile);
         }
-        if (info.file.status === 'done') {
-            getBase64(info.file.originFileObj as File, (url) => {
-                setLoading(false);
-                setImageUrl(url);
-            });
-        }
+        setPreviewImage(file.url || (file.preview as string));
+        setPreviewOpen(true);
+    };
+
+    const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+        setFileList(newFileList);
+        setProfileImg(newFileList.length > 0 ? newFileList[0] : null);
     };
 
     const uploadButton = (
-        <div>
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+        <button style={{ border: 0, background: 'none' }} type="button">
+            <PlusOutlined />
             <div style={{ marginTop: 8 }}>Upload</div>
-        </div>
+        </button>
     );
 
-    const onFinish = (values: SignupFieldType) => {
-        console.log('Success:', values);
+    const onFinish = async (values: SignupFieldType) => {
+        try {
+            const formData = new FormData();
+            if (profileImg && profileImg.originFileObj) {
+                formData.append('file', profileImg.originFileObj);
+            }
+
+            const data = {
+                email: values.email,
+                password: values.password,
+                nickname: values.nickname,
+                profileImageUrl: profileImg ? profileImg.name : ''
+            };
+
+            formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+
+            console.log(data)
+
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/signUp`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            if (response.status === 200) {
+                message.success('회원가입 성공!');
+                navigate('/login');
+            }
+        } catch (error) {
+            message.error('회원가입 실패. 다시 시도해주세요.');
+            console.error('Failed:', error);
+        }
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -78,7 +102,7 @@ const Signup: React.FC = () => {
             </div>
             <div className={styles.signupForm}>
                 <div className={styles.logoContainer}>
-                    <img src="/logo.png" alt="Logo"/>
+                    <img src="/logo.png" alt="Logo" />
                 </div>
                 <Form
                     name="signup"
@@ -90,25 +114,32 @@ const Signup: React.FC = () => {
                 >
                     <div className={styles.formItem}>
                         <div className={styles.avatarUploader}>
-                            <Form.Item name="avatar">
-                                <Upload
-                                    name="avatar"
-                                    listType="picture-circle"
-                                    className={styles.avatarUploader}
-                                    showUploadList={false}
-                                    action="https://jsonplaceholder.typicode.com/posts/"
-                                    beforeUpload={beforeUpload}
-                                    onChange={handleChange}
-                                >
-                                    {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-                                </Upload>
-                            </Form.Item>
+                            <Upload
+                                listType="picture-circle"
+                                fileList={fileList}
+                                onPreview={handlePreview}
+                                onChange={handleChange}
+                                beforeUpload={() => false} // Prevent automatic upload
+                            >
+                                {fileList.length >= 1 ? null : uploadButton}
+                            </Upload>
+                            {previewImage && (
+                                <Image
+                                    wrapperStyle={{ display: 'none' }}
+                                    preview={{
+                                        visible: previewOpen,
+                                        onVisibleChange: (visible) => setPreviewOpen(visible),
+                                        afterOpenChange: (visible) => !visible && setPreviewImage(''),
+                                    }}
+                                    src={previewImage}
+                                />
+                            )}
                         </div>
                     </div>
 
                     <div className={styles.formItem}>
                         <Form.Item<SignupFieldType>
-                            name="username"
+                            name="email"
                             rules={[{ required: true, message: '아이디를 입력해주세요.' }]}
                         >
                             <Input
@@ -156,7 +187,6 @@ const Signup: React.FC = () => {
                                     className={styles.inputField}
                                 />
                             </div>
-
                         </Form.Item>
                     </div>
 
@@ -165,13 +195,10 @@ const Signup: React.FC = () => {
                             name="nickname"
                             rules={[{ required: true, message: '닉네임을 입력해주세요.' }]}
                         >
-                            <Tooltip title="영어이름.성 으로 입력해주세요.">
-
                             <Input
                                 placeholder="닉네임  (예시) jeff.lim"
                                 className={styles.inputField}
                             />
-                            </Tooltip>
                         </Form.Item>
                     </div>
 

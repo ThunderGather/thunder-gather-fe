@@ -2,7 +2,8 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoCloseOutline } from "react-icons/io5";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import {Button, Checkbox, Form, Input, message} from 'antd';
+import axios from 'axios';
 import styles from './Login.module.css';
 
 type FieldType = {
@@ -18,8 +19,33 @@ const Login: React.FC = () => {
         navigate('/profile');
     };
 
-    const onFinish = (values: FieldType) => {
-        console.log('Success:', values);
+    const onFinish = async (values: FieldType) => {
+        try {
+            const response = await axios.post(
+                `${import.meta.env.VITE_BASE_URL}/auth/signin`,
+                {
+                    email: values.username,
+                    password: values.password,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    // withCredentials: true,
+                }
+            );
+            // console.log(data);
+
+            if (response.status === 200) {
+                const accessToken = response.data.accessToken
+                localStorage.setItem('access_token', accessToken)
+                message.success('로그인 성공!');
+                navigate('/');
+            }
+        } catch (error) {
+            message.error('로그인 실패. 다시 시도해주세요.');
+            console.error('Login failed:', error);
+        }
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -92,9 +118,7 @@ const Login: React.FC = () => {
                             </div>
                         </Form.Item>
                     </Form.Item>
-
                 </Form>
-
             </div>
         </div>
     );

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, DatePicker, TimePicker, Select, InputNumber, Row, Col, Button, Checkbox } from 'antd';
+import {useNavigate} from "react-router-dom";
+import {Form, Input, DatePicker, TimePicker, Select, InputNumber, Row, Col, Button, Checkbox, message} from 'antd';
+import axios from 'axios';
 import styles from './PostCreate.module.css';
 import Header from "../components/layout/Header";
 import { FaBoltLightning } from "react-icons/fa6";
@@ -11,8 +13,9 @@ type SizeType = 'small' | 'middle' | 'large';
 
 const PostCreate: React.FC = () => {
     const [form] = Form.useForm();
-    const [componentSize, setComponentSize] = useState<SizeType>('middle'); // Changed default size to 'middle'
+    const [componentSize, setComponentSize] = useState<SizeType>('middle');
     const [isOnline, setIsOnline] = useState(false);
+    const navigate = useNavigate();
 
     const onFormLayoutChange = ({ size }: { size: SizeType }) => {
         setComponentSize(size);
@@ -30,8 +33,35 @@ const PostCreate: React.FC = () => {
         }
     }, [isOnline, form]);
 
-    const handleSubmit = (values: any) => {
-        console.log('Form Values:', values);
+    const handleSubmit = async (values: any) => {
+        const postData = {
+            title: values.title,
+            desiredDate: values.date.format('YYYY-MM-DD'),
+            desiredTime: values.time.format('HH:mm'), // Convert to 24-hour format
+            category: values.category,
+            maxParticipants: values.capacity,
+            description: values.description,
+            location: values.location,
+            openChatUrl: values.chatUrl
+        };
+
+        console.log('Post Data:', postData);
+
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/post`, postData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log('Form Values:', response.data);
+            if (response.status === 200) {
+                message.success('번개 작성 완료!');
+                navigate('/');
+            }
+        } catch (error) {
+            message.error('번개 작성 실패 .. ');
+            console.error('Error submitting form:', error);
+        }
     };
 
     return (
@@ -93,7 +123,12 @@ const PostCreate: React.FC = () => {
                     <Row gutter={16} align="middle">
                         <Col span={16}>
                             <Form.Item label="위치" name="location" rules={[{ required: true, message: '위치를 입력해주세요!' }]}>
-                                <Input className={styles.inputField} placeholder="위치를 입력해주세요" />
+                                {/*<Input className={styles.inputField} placeholder="위치를 입력해주세요" />*/}
+                                {isOnline ? (
+                                    <Input className={styles.inputField} placeholder="위치를 입력해주세요" readOnly />
+                                ) : (
+                                    <Input className={styles.inputField} placeholder="위치를 입력해주세요" />
+                                )}
                             </Form.Item>
                         </Col>
                         <Col span={8}>

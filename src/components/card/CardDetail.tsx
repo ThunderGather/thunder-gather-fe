@@ -2,26 +2,41 @@ import React, { useState } from 'react';
 import styles from './CardDetail.module.css';
 import CardParticipant from "./CardParticipant.tsx";
 import { FaBoltLightning } from "react-icons/fa6";
-import { Tooltip, FloatButton, Typography } from 'antd';
+import {Tooltip, FloatButton, Typography, message} from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import AsyncModal from '../modal/Modal.tsx';
+import AsyncModal2 from "../modal/Modal2.tsx";
 
 const { Paragraph } = Typography;
 
 const CardDetail: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false);
-    // const [modalText, setModalText] = useState('Join request is being processed');
+    const [modalOpen2, setModalOpen2] = useState(false);
+
+    const handleDeleteClick = () => {
+        setModalOpen(true);
+    };
 
     const handleJoinClick = () => {
-        setModalOpen(true);
+        setModalOpen2(true);
     };
 
     const handleModalOk = () => {
         setModalOpen(false);
+
     };
 
     const handleModalCancel = () => {
         setModalOpen(false);
+    };
+
+    const handleModalOk2 = () => {
+        setModalOpen2(false);
+        message.success('참여 완료! 번개 종료 후 해당 오픈채팅방의 이용을 지양합시다.');
+    };
+
+    const handleModalCancel2 = () => {
+        setModalOpen2(false);
     };
 
     return (
@@ -30,7 +45,7 @@ const CardDetail: React.FC = () => {
                 <div className={styles.tag}>카페</div>
                 <div className={styles.btnContainer}>
                     <FloatButton.Group shape="square" style={{ right: 40 }}>
-                        <FloatButton icon={<DeleteOutlined onClick={() => alert("Delete clicked!")}/>}/>
+                        <FloatButton icon={<DeleteOutlined onClick={handleDeleteClick}/>}/>
                         <FloatButton icon={<EditOutlined onClick={() => alert("Edit clicked!")}/>} />
                     </FloatButton.Group>
                 </div>
@@ -51,9 +66,11 @@ const CardDetail: React.FC = () => {
             </div>
             <div className={styles.detailGroup}>
                 <span style={{ color: '#C9C3B6' }}>오픈채팅</span>
+                <button className={styles.urlShortcuts} onClick={() => window.open("https://i.namu.wiki/i/67v5G85ne3H19DBedmSJUd3vKPQk-5oaaa5z-kq8gFLTyzd_Ei-noXvfzGhDtMZp2VsqORNJ0WOhfjlZIQHdmw.webp", "_blank")}>
+                    바로가기
+                </button>
                 <Paragraph copyable={{ tooltips: false }} className={styles.chatLink}>https://www.gle.com/w.google.com/w.googoogle.com/w.google.comhttps://www.google.com</Paragraph>
             </div>
-            {/*<div className={styles.map}>지도 지도 지도 지도 </div>*/}
             <div className={styles.description}>
                 스타벅스에서 스근하게 코딩할사람 모집합니다~~
                 4시간정도 공부하다가 저녁도 같이 먹읍쉬다
@@ -75,10 +92,16 @@ const CardDetail: React.FC = () => {
                 <CardParticipant imgSrc="/images/eric.jpeg" name="eric.ha" />
             </div>
             <AsyncModal
-                modalText="번개에 참여 하시겠습니까?"
+                modalText="번개를 삭제하시겠습니까?"
                 open={modalOpen}
                 onOk={handleModalOk}
                 onCancel={handleModalCancel}
+            />
+            <AsyncModal2
+                modalText="번개에 참여하시겠습니까?"
+                open={modalOpen2}
+                onOk={handleModalOk2}
+                onCancel={handleModalCancel2}
             />
         </div>
     );

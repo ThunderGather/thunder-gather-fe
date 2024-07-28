@@ -10,4 +10,7 @@ export default defineConfig({
       logo: "public/favicon.png",
     }),
   ],
+  define: {
+    'process.env': {}
+  }
 })
