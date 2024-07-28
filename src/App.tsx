@@ -10,6 +10,7 @@ import Footer from "./components/layout/Footer.tsx";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup.tsx";
 import PostCreate from "./pages/PostCreate.tsx";
+import PostEdit from "./pages/PostEdit.tsx";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                     <Route path={URL.signin} element={<Login/>}/>
                     <Route path={URL.signup} element={<Signup/>}/>
                     <Route path={URL.createPost} element={<PostCreate/>}/>
+                    <Route path={URL.editPost} element={<PostEdit/>}/>
                     <Route path={URL.postCategory} element={<Post />} />
                     {/* Add more routes here as needed */}
                 </Routes>

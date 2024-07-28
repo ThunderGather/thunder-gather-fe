@@ -1,0 +1,69 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 90px;
+    justify-content: center;
+    padding: 30px;
+    /*height: calc(100vh - 40px);*/
+    overflow-y: hidden;
+}
+
+.formContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 20px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    /*background-color: red;*/
+}
+
+.submitBtnContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.submitBtn {
+    height: 50px;
+    width: 120px;
+    border-radius: 10px;
+    background-color: #F7DF66;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.submitBtn:hover  {
+    background-color: #f7d874;
+    color: #fac100;
+    box-shadow: 0 0 5px #fac100,
+    0 0 4px #fac100,
+    0 0 30px #fac100,
+    0 0 60px #fac100;
+    border: none;
+}
+
+.inputField {
+    height: 50px;
+    font-size: 14px;
+}
+
+.textAreaField {
+    height: 180px;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.datePickerField, .timePickerField, .inputNumberField, .selectField {
+    height: 50px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+
+}

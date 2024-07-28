@@ -76,7 +76,8 @@ const Profile: React.FC = () => {
                             <IoIosArrowForward className={styles.icon} />
                         </button>
                     )}
-                    <button className={styles.feedback}>
+                    <button className={styles.feedback}
+                            onClick={() => window.open("https://forms.gle/cumcUmVNSAYSojdo6", "_blank")}>
                         <div className={styles.feedbackTitle}>번게더 피드백 주기</div>
                         <IoIosArrowForward className={styles.icon} />
                     </button>

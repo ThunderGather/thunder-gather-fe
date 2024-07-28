@@ -1,20 +1,34 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styles from './CardDetail.module.css';
 import CardParticipant from "./CardParticipant.tsx";
 import { FaBoltLightning } from "react-icons/fa6";
-import {Tooltip, FloatButton, Typography, message} from 'antd';
+import { Tooltip, FloatButton, Typography, message } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import AsyncModal from '../modal/Modal.tsx';
 import AsyncModal2 from "../modal/Modal2.tsx";
+import { useNavigate } from "react-router-dom";
 
 const { Paragraph } = Typography;
 
 const CardDetail: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalOpen2, setModalOpen2] = useState(false);
+    const navigate = useNavigate();
 
     const handleDeleteClick = () => {
         setModalOpen(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        try {
+            await axios.delete(`${import.meta.env.VITE_BASE_URL}/post/{postId}`);
+            message.success('번개가 삭제되었습니다.');
+            navigate('/'); // Navigate to another page if needed
+        } catch (error) {
+            message.error('번개 삭제에 실패했습니다.');
+        }
+        setModalOpen(false);
     };
 
     const handleJoinClick = () => {
@@ -22,8 +36,7 @@ const CardDetail: React.FC = () => {
     };
 
     const handleModalOk = () => {
-        setModalOpen(false);
-
+        handleDeleteConfirm();
     };
 
     const handleModalCancel = () => {
@@ -45,8 +58,8 @@ const CardDetail: React.FC = () => {
                 <div className={styles.tag}>카페</div>
                 <div className={styles.btnContainer}>
                     <FloatButton.Group shape="square" style={{ right: 40 }}>
-                        <FloatButton icon={<DeleteOutlined onClick={handleDeleteClick}/>}/>
-                        <FloatButton icon={<EditOutlined onClick={() => alert("Edit clicked!")}/>} />
+                        <FloatButton icon={<DeleteOutlined onClick={handleDeleteClick} />} />
+                        <FloatButton icon={<EditOutlined />} onClick={() => navigate('/post/edit')} />
                     </FloatButton.Group>
                 </div>
             </div>

@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
   });
 
   // Hide the Footer on /login and /signup routes
-  if (path === '/login' || path === '/signup' || path === '/post/create') {
+  if (path === '/login' || path === '/signup' || path === '/post/create' || path === '/post/edit') {
     return null;
   }
 

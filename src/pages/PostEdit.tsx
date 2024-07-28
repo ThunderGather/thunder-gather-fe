@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate} from "react-router-dom";
-import {Form, Input, DatePicker, TimePicker, Select, InputNumber, Row, Col, Button, Checkbox, message} from 'antd';
-import axios from 'axios';
-import styles from './PostCreate.module.css';
+import { useNavigate, useParams } from "react-router-dom";
+import { Form, Input, DatePicker, TimePicker, Select, InputNumber, Row, Col, Button, Checkbox, message } from 'antd';
+import styles from './PostEdit.module.css';
 import Header from "../components/layout/Header";
-import { FaBoltLightning } from "react-icons/fa6";
+import dayjs from 'dayjs';
+import axios from 'axios';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 type SizeType = 'small' | 'middle' | 'large';
 
-const PostCreate: React.FC = () => {
+const PostEdit: React.FC = () => {
     const [form] = Form.useForm();
     const [componentSize, setComponentSize] = useState<SizeType>('middle');
     const [isOnline, setIsOnline] = useState(false);
     const navigate = useNavigate();
+    const { postId } = useParams();
 
     const onFormLayoutChange = ({ size }: { size: SizeType }) => {
         setComponentSize(size);
@@ -33,40 +34,63 @@ const PostCreate: React.FC = () => {
         }
     }, [isOnline, form]);
 
+    useEffect(() => {
+        // Fetch post data and populate the form fields
+        const postData = {
+            title: "코딩 스터디 모집 (수정)",
+            desiredDate: "2024-09-01",
+            desiredTime: "22:02",
+            category: "공부",
+            capacity: 10,
+            description: "함께 코딩 공부할 분을 추가 모집합니다.",
+            location: "스타벅스 강남점",
+            chatUrl: "https://openchat.example.com",
+            isOnline: false
+        };
+
+        form.setFieldsValue({
+            ...postData,
+            desiredDate: dayjs(postData.desiredDate),
+            desiredTime: dayjs(postData.desiredTime, 'HH:mm')
+        });
+        setIsOnline(postData.isOnline);
+    }, [form]);
+
     const handleSubmit = async (values: any) => {
         const postData = {
             title: values.title,
-            desiredDate: values.date.format('YYYY-MM-DD'),
-            desiredTime: values.time.format('HH:mm'), // Convert to 24-hour format
+            desiredDate: values.desiredDate.format('YYYY-MM-DD'),
+            desiredTime: values.desiredTime.format('HH:mm'), // Convert to 24-hour format
             category: values.category,
-            maxParticipants: values.capacity,
+            capacity: values.capacity,
             description: values.description,
             location: values.location,
-            openChatUrl: values.chatUrl
+            chatUrl: values.chatUrl
         };
 
         console.log('Post Data:', postData);
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/post`, postData, {
+            const response = await axios.patch(`${import.meta.env.VITE_BASE_URL}/post/${postId}`, postData, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
                 }
             });
             console.log('Form Values:', response.data);
             if (response.status === 200) {
-                message.success('번개 작성 완료!');
+                message.success('게시물이 수정되었습니다.');
                 navigate('/');
             }
         } catch (error) {
-            message.error('번개 작성 실패 .. 다시 시도해주세요.');
+            message.error('게시물 수정 실패 .. 다시 시도해주세요.');
             console.error('Error submitting form:', error);
         }
     };
 
     return (
         <div className={styles.container}>
-            <Header title='번개 생성' showLeft='no' showRight='yes' showLine='yes' />
+            <Header title='번개 수정' showLeft='no' showRight='yes' showLine='yes' />
             <div className={styles.formContainer}>
                 <Form
                     form={form}
@@ -83,13 +107,22 @@ const PostCreate: React.FC = () => {
 
                     <Row gutter={16}>
                         <Col span={12}>
-                            <Form.Item label="날짜" name="date" rules={[{ required: true, message: '날짜를 선택해주세요!' }]}>
-                                <DatePicker className={styles.datePickerField} style={{ width: '100%' }} placeholder="날짜를 선택해주세요" />
+                            <Form.Item label="날짜" name="desiredDate" rules={[{ required: true, message: '날짜를 선택해주세요!' }]}>
+                                <DatePicker
+                                    className={styles.datePickerField}
+                                    style={{ width: '100%' }}
+                                    placeholder="날짜를 선택해주세요"
+                                />
                             </Form.Item>
                         </Col>
                         <Col span={12}>
-                            <Form.Item label="시간" name="time" rules={[{ required: true, message: '시간을 선택해주세요!' }]}>
-                                <TimePicker className={styles.timePickerField} format="h:mm a" style={{ width: '100%' }} placeholder="시간을 선택해주세요" />
+                            <Form.Item label="시간" name="desiredTime" rules={[{ required: true, message: '시간을 선택해주세요!' }]}>
+                                <TimePicker
+                                    className={styles.timePickerField}
+                                    format="HH:mm"
+                                    style={{ width: '100%' }}
+                                    placeholder="시간을 선택해주세요"
+                                />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -106,6 +139,7 @@ const PostCreate: React.FC = () => {
                                     <Option value="산책">산책</Option>
                                     <Option value="쇼핑">쇼핑</Option>
                                     <Option value="코딩">코딩</Option>
+                                    <Option value="공부">공부</Option>
                                 </Select>
                             </Form.Item>
                         </Col>
@@ -123,7 +157,6 @@ const PostCreate: React.FC = () => {
                     <Row gutter={16} align="middle">
                         <Col span={16}>
                             <Form.Item label="위치" name="location" rules={[{ required: true, message: '위치를 입력해주세요!' }]}>
-                                {/*<Input className={styles.inputField} placeholder="위치를 입력해주세요" />*/}
                                 {isOnline ? (
                                     <Input className={styles.inputField} placeholder="위치를 입력해주세요" readOnly />
                                 ) : (
@@ -145,7 +178,7 @@ const PostCreate: React.FC = () => {
                     <Form.Item>
                         <div className={styles.submitBtnContainer}>
                             <Button type="primary" htmlType="submit" className={styles.submitBtn}>
-                                <FaBoltLightning />
+                                수정
                             </Button>
                         </div>
                     </Form.Item>
@@ -155,4 +188,4 @@ const PostCreate: React.FC = () => {
     );
 };
 
-export default PostCreate;
+export default PostEdit;
