@@ -17,6 +17,14 @@
 }
 
 
+.infoContainer {
+    position: absolute;
+    right: 60px;
+    top: 30px;
+    cursor: pointer;
+}
+
+
 .logoContainer {
     align-items: center;
     display: flex;

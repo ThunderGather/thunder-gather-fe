@@ -47,9 +47,12 @@
 
 
 .title {
-    flex: 1;
-    text-align: center;
+    /*flex: 1;*/
+    /*text-align: center;*/
     font-size: 22px;
     font-weight: bold;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
