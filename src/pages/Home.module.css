@@ -57,6 +57,23 @@
 
 }
 
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+}
+
+.infoIcon {
+    width: 100%;
+}
+
+.infoText {
+    font-size: 12px;
+    margin: 0;
+}
+
 
 .categoryImage {
     width: 70%;

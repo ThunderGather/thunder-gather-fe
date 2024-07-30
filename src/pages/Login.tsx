@@ -40,7 +40,7 @@ const Login: React.FC = () => {
                 const accessToken = response.data.accessToken
                 localStorage.setItem('access_token', accessToken)
                 message.success('로그인 성공!');
-                navigate('/');
+                navigate('/profile');
             }
         } catch (error) {
             message.error('로그인 실패. 다시 시도해주세요.');

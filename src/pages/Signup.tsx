@@ -70,6 +70,7 @@ const Signup: React.FC = () => {
             };
 
             formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+            // formData.append('data', JSON.stringify(data));
 
             console.log(data)
 

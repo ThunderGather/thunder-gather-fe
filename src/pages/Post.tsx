@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import styles from './Post.module.css';
 import Header from "../components/layout/Header.tsx";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,17 +8,32 @@ import { MdOutlineCategory } from "react-icons/md";
 import { Select, Space } from 'antd';
 import { useParams } from 'react-router-dom';
 
+interface Participant {
+    id: number;
+    nickname: string;
+    profileImageUrl: string;
+    author: boolean;
+}
+
+interface PostData {
+    postId: number;
+    userId: number;
+    category: string;
+    title: string;
+    dateTime: string;
+    maxParticipants: number;
+    participants: Participant[];
+}
+
 const Post: React.FC = () => {
     const { category } = useParams<{ category: string }>();
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-
+    const [posts, setPosts] = useState<PostData[]>([]); // Initialize as an array
 
     const handleChange = (value: string[]) => {
         setSelectedCategories(value);
         console.log(`selected ${value}`);
     };
-
-
 
     const options = [
         { label: '밥', value: '밥', emoji: '🍚', desc: '밥' },
@@ -34,7 +50,28 @@ const Post: React.FC = () => {
         if (category && options.find(option => option.value === category)) {
             setSelectedCategories([category]);
         }
+
+        // Fetch posts data from the API
+        axios.get(`${import.meta.env.VITE_BASE_URL}/post/list`)
+            .then(response => {
+                // Ensure response data is an array
+                if (Array.isArray(response.data)) {
+                    setPosts(response.data);
+                } else {
+                    console.error('Unexpected response data:', response.data);
+                    setPosts([]); // Set an empty array if the response is not as expected
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching posts data:', error);
+                setPosts([]); // Set an empty array on error
+            });
     }, [category]);
+
+    // Filter posts based on selected categories
+    const filteredPosts = selectedCategories.length > 0
+        ? posts.filter(post => selectedCategories.includes(post.category))
+        : posts;
 
     return (
         <div className={styles.container}>
@@ -69,13 +106,15 @@ const Post: React.FC = () => {
             </div>
             <div className={styles.itemContainer}>
                 <div className={styles.dailyGroup}>
-                    <CardItem/>
-                    <CardItem/>
-                    <CardItem/>
-                    <CardItem/>
-                    <CardItem/>
-                    <CardItem/>
-                    <CardItem/>
+                    {filteredPosts.map(post => (
+                        <CardItem
+                            key={post.postId}
+                            category={post.category}
+                            title={post.title}
+                            dateTime={post.dateTime}
+                            participants={post.participants}
+                        />
+                    ))}
                 </div>
             </div>
         </div>

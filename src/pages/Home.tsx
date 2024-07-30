@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Home.module.css';
 import { useNavigate } from 'react-router-dom';
-import CardItem from "../components/card/CardItem.tsx";
-// import Footer from "../components/layout/Footer.tsx";
+import CardItem from "../components/card/CardItem";
 import { FaBoltLightning } from "react-icons/fa6";
-import {Popover} from 'antd';
+import { Popover } from 'antd';
+import axios from 'axios';
+
+interface Participant {
+    id: number;
+    nickname: string;
+    profileImageUrl: string;
+    author: boolean;
+}
+
+interface Post {
+    postId: number;
+    userId: number;
+    category: string;
+    title: string;
+    dateTime: string;
+    maxParticipants: number;
+    participants: Participant[];
+}
 
 const categories = [
     { id: 1, name: '밥', imgSrc: '/category/1.png', path: '/post/밥' },
@@ -17,25 +34,21 @@ const categories = [
     { id: 8, name: '코딩', imgSrc: '/category/8.png', path: '/post/코딩' }
 ];
 
-
 const Home: React.FC = () => {
-    // const [arrow, setArrow] = useState('Show');
-
+    const [posts, setPosts] = useState<Post[]>([]);
     const navigate = useNavigate();
 
-    // const mergedArrow = useMemo(() => {
-    //     if (arrow === 'Hide') {
-    //         return false;
-    //     }
-    //
-    //     if (arrow === 'Show') {
-    //         return true;
-    //     }
-    //
-    //     return {
-    //         pointAtCenter: true,
-    //     };
-    // }, [arrow]);
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_BASE_URL}/post/list`)
+            .then(response => {
+                console.log('Fetched posts:', response.data); // Debug log
+                setPosts(Array.isArray(response.data) ? response.data : []);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                setPosts([]);
+            });
+    }, []);
 
     const handleCategoryClick = (path: string) => {
         navigate(path);
@@ -44,8 +57,9 @@ const Home: React.FC = () => {
     return (
         <div className={styles.container}>
             <div className={styles.infoContainer}>
-                <Popover overlayStyle={{ width: '300px' }}  placement="bottomRight" title={"번게더란?"} content={"카클스를 위한 카클스에 의한 소모임 플랫폼입니다! 수강생 50명 모두가 원하는 소모임을 만들고 참여할 수 있는 장을 만들고 싶었어요. 자유롭게 번개를 생성하고 참여하되, 오픈채팅방은 번개 종료시 이용하지 않도록 합시다! ⚡️"}>
-                <FaBoltLightning className={styles.info} />
+                <Popover overlayStyle={{ width: '300px' }}  placement="bottomRight" title={"번게더란?"} content={"카클스를 위한 카클스에 의한 소모임 플랫폼입니다! 수강생 50명 모두가 원하는 번개를 만들고 참여할 수 있는 장을 만들고 싶었어요. 자유롭게 번개를 생성하고 참여하되, 오픈채팅방은 번개 종료시 이용하지 않도록 합시다! ⚡️"}>
+                    <FaBoltLightning className={styles.infoIcon} />
+                    <div className={styles.infoText}>이용 안내</div>
                 </Popover>
             </div>
             <div className={styles.logoContainer}>
@@ -57,7 +71,6 @@ const Home: React.FC = () => {
                         key={category.id}
                         className={styles.categoryButton}
                         onClick={() => handleCategoryClick(category.path)}
-
                     >
                         <div className={styles.imgContainer}>
                             <img src={category.imgSrc} alt={category.name} className={styles.categoryImage}/>
@@ -71,12 +84,15 @@ const Home: React.FC = () => {
                     <span className={styles.title}>오늘의 번개⚡️</span>
                 </div>
                 <div className={styles.todayList}>
-                    <CardItem />
-                    <CardItem />
-                    <CardItem />
-                    <CardItem />
-                    <CardItem />
-                    {/*<CardItem />*/}
+                    {posts.map(post => (
+                        <CardItem
+                            key={post.postId}
+                            category={post.category}
+                            title={post.title}
+                            dateTime={post.dateTime}
+                            participants={post.participants}
+                        />
+                    ))}
                 </div>
             </div>
         </div>
