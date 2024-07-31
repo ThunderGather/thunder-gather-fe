@@ -7,6 +7,7 @@ import CardItem from "../components/card/CardItem.tsx";
 import { MdOutlineCategory } from "react-icons/md";
 import { Select, Space } from 'antd';
 import { useParams } from 'react-router-dom';
+import { SpinnerCircular } from 'spinners-react';
 
 interface Participant {
     id: number;
@@ -28,7 +29,8 @@ interface PostData {
 const Post: React.FC = () => {
     const { category } = useParams<{ category: string }>();
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-    const [posts, setPosts] = useState<PostData[]>([]); // Initialize as an array
+    const [posts, setPosts] = useState<PostData[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);  // Loading state
 
     const handleChange = (value: string[]) => {
         setSelectedCategories(value);
@@ -51,24 +53,25 @@ const Post: React.FC = () => {
             setSelectedCategories([category]);
         }
 
-        // Fetch posts data from the API
+        setLoading(true);  // Set loading state to true before making the request
         axios.get(`${import.meta.env.VITE_BASE_URL}/post/list`)
             .then(response => {
-                // Ensure response data is an array
                 if (Array.isArray(response.data)) {
                     setPosts(response.data);
                 } else {
                     console.error('Unexpected response data:', response.data);
-                    setPosts([]); // Set an empty array if the response is not as expected
+                    setPosts([]);
                 }
             })
             .catch(error => {
                 console.error('Error fetching posts data:', error);
-                setPosts([]); // Set an empty array on error
+                setPosts([]);
+            })
+            .finally(() => {
+                setLoading(false);  // Set loading state to false after the request completes
             });
     }, [category]);
 
-    // Filter posts based on selected categories
     const filteredPosts = selectedCategories.length > 0
         ? posts.filter(post => selectedCategories.includes(post.category))
         : posts;
@@ -106,15 +109,20 @@ const Post: React.FC = () => {
             </div>
             <div className={styles.itemContainer}>
                 <div className={styles.dailyGroup}>
-                    {filteredPosts.map(post => (
-                        <CardItem
-                            key={post.postId}
-                            category={post.category}
-                            title={post.title}
-                            dateTime={post.dateTime}
-                            participants={post.participants}
-                        />
-                    ))}
+                    {loading ? (
+                        <SpinnerCircular size={50} color="#F7DF66" />  // Spinner while loading
+                    ) : (
+                        filteredPosts.map(post => (
+                            <CardItem
+                                key={post.postId}
+                                postId={post.postId}
+                                category={post.category}
+                                title={post.title}
+                                dateTime={post.dateTime}
+                                participants={post.participants}
+                            />
+                        ))
+                    )}
                 </div>
             </div>
         </div>

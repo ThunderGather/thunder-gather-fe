@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import styles from './CardItem.module.css';
 import { Avatar, Drawer, Tooltip } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-// import CardDetail from "./CardDetail.tsx";
+import CardDetail from "./CardDetail.tsx";
 import { FaDeleteLeft } from "react-icons/fa6";
 import AsyncModal from "../modal/Modal.tsx";
 
@@ -15,18 +15,20 @@ interface Participant {
 }
 
 interface CardItemProps {
+    postId: number;
     category: string;
     title: string;
     dateTime: string;
     participants: Participant[];
 }
 
-const CardItem: React.FC<CardItemProps> = ({ category, title, dateTime, participants }) => {
+const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, participants }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [drawerVisible, setDrawerVisible] = useState(false);
     const location = useLocation();
 
-    const showDrawer = () => {
+    const showDrawer = (postId: number) => {
+        console.log(`Post ID: ${postId}`);
         setDrawerVisible(true);
     }
 
@@ -46,6 +48,21 @@ const CardItem: React.FC<CardItemProps> = ({ category, title, dateTime, particip
         setModalOpen(false);
     };
 
+    const formatDateTime = (dateTime: string) => {
+        const date = new Date(dateTime);
+        const dayOfWeek = date.toLocaleDateString('ko-KR', { weekday: 'short' });
+        const formattedDate = date.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+        });
+        const formattedTime = date.toLocaleTimeString('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+        });
+        return `${formattedDate}(${dayOfWeek}) ${formattedTime}`;
+    }
+
     return (
         <>
             <div className={styles.container}>
@@ -60,11 +77,11 @@ const CardItem: React.FC<CardItemProps> = ({ category, title, dateTime, particip
                     </div>
 
                     <div className={styles.title}>{title}</div>
-                    <div className={styles.date}>{new Date(dateTime).toLocaleString()}</div>
+                    <div className={styles.date}>{formatDateTime(dateTime)}</div>
                     <div className={styles.people}>
                         <Avatar.Group
-                            maxCount={3}
-                            maxPopoverTrigger="click"
+                            max={{ count: 3}}
+                            maxPopoverTrigger= "click"
                             size="small"
                             maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
                         >
@@ -76,7 +93,7 @@ const CardItem: React.FC<CardItemProps> = ({ category, title, dateTime, particip
                         </Avatar.Group>
                     </div>
                 </div>
-                <button className={styles.button} onClick={showDrawer}><span>more</span></button>
+                <button className={styles.button} onClick={() => showDrawer(postId)}><span>more</span></button>
             </div>
             <Drawer
                 title="번개 자세히 보기"
@@ -96,7 +113,7 @@ const CardItem: React.FC<CardItemProps> = ({ category, title, dateTime, particip
                     overflowY: 'auto',
                 }}
             >
-                {/*<CardDetail category={category} title={title} dateTime={dateTime} participants={participants} />*/}
+                <CardDetail postId={postId} />
             </Drawer>
             <AsyncModal
                 modalText="번개참여를 취소하시겠습니까?"

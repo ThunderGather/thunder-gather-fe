@@ -3,7 +3,7 @@ import styles from './Profile.module.css';
 import Header from "../components/layout/Header.tsx";
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
-import CardItem from "../components/card/CardItem.tsx";
+// import CardItem from "../components/card/CardItem.tsx";
 // import axios from "axios";
 import {message} from "antd";
 
@@ -87,9 +87,9 @@ const Profile: React.FC = () => {
                         내 번개 목록
                     </div>
                     <div className={styles.itemContainer}>
-                        <CardItem />
-                        <CardItem />
-                        <CardItem />
+                        {/*<CardItem />*/}
+                        {/*<CardItem />*/}
+                        {/*<CardItem />*/}
                     </div>
                 </div>
             </div>
