@@ -100,6 +100,7 @@ const Home: React.FC = () => {
                         posts.map(post => (
                             <CardItem
                                 key={post.postId}
+                                postId={post.postId}
                                 category={post.category}
                                 title={post.title}
                                 dateTime={post.dateTime}
