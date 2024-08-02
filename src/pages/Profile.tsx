@@ -3,6 +3,7 @@ import styles from './Profile.module.css';
 import Header from "../components/layout/Header.tsx";
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
+// import { GrAnnounce } from "react-icons/gr";
 // import CardItem from "../components/card/CardItem.tsx";
 // import axios from "axios";
 import {message} from "antd";
@@ -90,6 +91,9 @@ const Profile: React.FC = () => {
                         {/*<CardItem />*/}
                         {/*<CardItem />*/}
                         {/*<CardItem />*/}
+                    </div>
+                    <div className={styles.noticesContainer}>
+
                     </div>
                 </div>
             </div>

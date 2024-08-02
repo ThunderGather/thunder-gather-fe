@@ -6,5 +6,6 @@ export const URL = {
     createPost: '/post/create',
     editPost: 'post/edit',
     profile: '/profile',
-    postCategory: '/post/:category'
+    postCategory: '/post/:category',
+    notices: '/notices'
 };

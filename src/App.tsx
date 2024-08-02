@@ -30,6 +30,7 @@ function App() {
                     <Route path={URL.createPost} element={<PostCreate/>}/>
                     <Route path={URL.editPost} element={<PostEdit/>}/>
                     <Route path={URL.postCategory} element={<Post />} />
+
                     {/* Add more routes here as needed */}
                 </Routes>
                 </div>
