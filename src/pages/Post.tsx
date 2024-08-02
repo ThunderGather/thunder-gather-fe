@@ -88,7 +88,7 @@ const Post: React.FC = () => {
                         </div>
                         <Select
                             mode="multiple"
-                            style={{width: '80%', fontSize: '12px', height: '32px'}}
+                            style={{ width: '80%', fontSize: '12px', height: 'auto' }}
                             className={styles.categorySelect}
                             placeholder="카테고리를 선택해주세요"
                             value={selectedCategories}

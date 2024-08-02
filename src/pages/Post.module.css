@@ -34,7 +34,7 @@
     height: 20%;
     /*background-color: red;*/
     position: absolute;
-    bottom: 18px;
+    bottom: 35px;
     right: 12px;
     display: flex;
     flex-direction: column;
@@ -44,15 +44,11 @@
     /*background-color: red;*/
 }
 
-.dataPicker {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 5px;
-}
 
 .categoryPicker {
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
 
 }
 
