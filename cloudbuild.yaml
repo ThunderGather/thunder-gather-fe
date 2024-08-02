@@ -8,3 +8,6 @@ steps:
 
 images:
   - 'gcr.io/sideproject-431100/thunder-gather-fe'
+options:
+  logging: CLOUD_LOGGING_ONLY
+logsBucket: "gs://428717710802-asia-east1-blueprint-config"
