@@ -3,7 +3,7 @@ import styles from './Profile.module.css';
 import Header from "../components/layout/Header.tsx";
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
-// import { GrAnnounce } from "react-icons/gr";
+import { GrAnnounce } from "react-icons/gr";
 // import CardItem from "../components/card/CardItem.tsx";
 // import axios from "axios";
 import {message} from "antd";
@@ -68,20 +68,36 @@ const Profile: React.FC = () => {
                         <button className={styles.signIn} onClick={handleToSignin}>
                             <div className={styles.signInTitle}>로그인 및 회원가입</div>
                             <div className={styles.signInSubTitle}>번게더에 가입하고 번개에 참여해주세요!</div>
-                            <IoIosArrowForward className={styles.icon} />
+                            <IoIosArrowForward className={styles.icon}/>
                         </button>
                     )}
                     {isLoggedIn && (
                         <button className={styles.logout} onClick={handleLogout}>
                             <div className={styles.logoutTitle}>로그아웃</div>
-                            <IoIosArrowForward className={styles.icon} />
+                            <IoIosArrowForward className={styles.icon}/>
                         </button>
                     )}
                     <button className={styles.feedback}
                             onClick={() => window.open("https://forms.gle/cumcUmVNSAYSojdo6", "_blank")}>
-                        <div className={styles.feedbackTitle}>번게더 피드백 주기</div>
-                        <IoIosArrowForward className={styles.icon} />
+                        <div className={styles.feedbackTitle}>
+
+                            번게더 피드백 주기</div>
+                        <IoIosArrowForward className={styles.icon}/>
                     </button>
+                    <button className={styles.notices}
+                            onClick={() => navigate('/notices')}>
+                        <div className={styles.feedbackTitle}>
+                            <GrAnnounce /> <span>공지사항</span></div>
+                        <IoIosArrowForward className={styles.icon}/>
+                    </button>
+                    {/*<div className={styles.noticesContainer}>*/}
+
+                    {/*    <a href="/notices" className={styles.noticesBtn}>*/}
+                    {/*        <GrAnnounce className={styles.noticesIcon}/>*/}
+                    {/*        <span>공지사항</span>*/}
+                    {/*    </a>*/}
+
+                    {/*</div>*/}
                 </div>
                 <div className={styles.bottomContainer}>
                     <div className={styles.myListTitle}>
@@ -92,9 +108,7 @@ const Profile: React.FC = () => {
                         {/*<CardItem />*/}
                         {/*<CardItem />*/}
                     </div>
-                    <div className={styles.noticesContainer}>
 
-                    </div>
                 </div>
             </div>
         </>

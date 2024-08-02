@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup.tsx";
 import PostCreate from "./pages/PostCreate.tsx";
 import PostEdit from "./pages/PostEdit.tsx";
+import Notices from "./pages/Notices.tsx";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                     <Route path={URL.createPost} element={<PostCreate/>}/>
                     <Route path={URL.editPost} element={<PostEdit/>}/>
                     <Route path={URL.postCategory} element={<Post />} />
+                    <Route path={URL.notices} element={<Notices />} />
 
                     {/* Add more routes here as needed */}
                 </Routes>
