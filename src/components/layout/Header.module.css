@@ -1,4 +1,5 @@
 .container {
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,10 +40,13 @@
 
 .leftIcon {
     font-size: 21px;
+
 }
 
 .rightIcon {
     font-size: 24px;
+    position: absolute;
+    right: 25px;
 }
 
 
