@@ -10,6 +10,10 @@ export default defineConfig({
       logo: "public/favicon.png",
     }),
   ],
+  build: {
+    outDir: 'dist', // 빌드 아웃풋 디렉토리 설정
+    sourcemap: true // 소스맵 생성 (필요시)
+  },
   define: {
     'process.env': {}
   }

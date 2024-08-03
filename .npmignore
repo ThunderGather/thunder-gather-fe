@@ -1,0 +1,25 @@
+# node_modules 폴더를 제외하여 패키지 크기를 줄임
+node_modules/
+
+# 빌드 이전의 소스 코드를 제외
+src/
+
+# 빌드 아티팩트를 제외하지 않도록 합니다
+dist/
+
+# 환경 변수 파일을 제외하여 보안을 강화
+.env
+.env.local
+.env.*.local
+
+# 로그 파일을 제외
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vite 설정 파일을 제외하지 않도록 합니다
+.vite/
+
+# 기타
+.DS_Store
+Thumbs.db
