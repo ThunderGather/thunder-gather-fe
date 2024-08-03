@@ -68,6 +68,7 @@
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 5px;
+    color: #000000;
 }
 
 .signInSubTitle {
@@ -124,6 +125,7 @@
 .feedbackTitle {
     font-size: 20px;
     font-weight: 500;
+    color: #000000;
 
 }
 
@@ -145,6 +147,7 @@
 .logoutTitle {
     font-size: 20px;
     font-weight: 500;
+    color: #000000;
 
 }
 

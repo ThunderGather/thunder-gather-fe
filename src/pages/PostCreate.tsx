@@ -48,9 +48,11 @@ const PostCreate: React.FC = () => {
         console.log('Post Data:', postData);
 
         try {
+            const token = localStorage.getItem('access_token');
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/post`, postData, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 }
             });
             console.log('Form Values:', response.data);
