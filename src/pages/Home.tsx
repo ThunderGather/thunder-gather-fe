@@ -69,7 +69,7 @@ const Home: React.FC = () => {
             <div className={styles.infoContainer}>
                 <Popover overlayStyle={{ width: '300px' }} placement="bottomRight" title={"번게더란?"} content={"카클스를 위한 카클스에 의한 소모임 플랫폼입니다! 수강생 50명 모두가 원하는 번개를 함께할 수 있는 장을 만들고 싶었어요. 자유롭게 번개를 생성하고 참여하되, 오픈채팅방은 번개 종료시 이용하지 않도록 합시다! ⚡️"}>
                     <FaBoltLightning className={styles.infoIcon} />
-                    <span className={styles.infoText}>이용 안내</span>
+                    <span className={styles.infoText}>이용안내</span>
                 </Popover>
             </div>
             <div className={styles.logoContainer}>

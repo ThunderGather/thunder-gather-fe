@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './CardDetail.module.css';
-import CardParticipant from "./CardParticipant.tsx";
+import CardParticipant from "./CardParticipant";
 import { FaBoltLightning } from "react-icons/fa6";
 import { Tooltip, FloatButton, Typography, message } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import AsyncModal from '../modal/Modal.tsx';
-import AsyncModal2 from '../modal/Modal2.tsx';
+import AsyncModal from '../modal/Modal';
+import AsyncModal2 from '../modal/Modal2';
 import { useNavigate } from "react-router-dom";
 import { SpinnerCircular } from 'spinners-react';
 
@@ -42,14 +42,34 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
     };
 
     const handleDeleteConfirm = async () => {
+        const token = localStorage.getItem('access_token');
         try {
-            await axios.delete(`${import.meta.env.VITE_BASE_URL}/post/${postId}`);
+            await axios.delete(`${import.meta.env.VITE_BASE_URL}/post/${postId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             message.success('번개가 삭제되었습니다.');
             navigate('/'); // Navigate to another page if needed
         } catch (error) {
             message.error('번개 삭제에 실패했습니다.');
         }
         setModalOpen(false);
+    };
+
+    const handleJoinConfirm = async () => {
+        const token = localStorage.getItem('access_token');
+        try {
+            await axios.post(`${import.meta.env.VITE_BASE_URL}/meeting/${postId}`, {}, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            message.success('참여 완료! 번개 종료 후 해당 오픈채팅방의 이용을 지양합시다.');
+        } catch (error) {
+            message.error('번개 참여에 실패했습니다.');
+        }
+        setModalOpen2(false);
     };
 
     const handleJoinClick = () => {
@@ -65,8 +85,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
     };
 
     const handleModalOk2 = () => {
-        setModalOpen2(false);
-        message.success('참여 완료! 번개 종료 후 해당 오픈채팅방의 이용을 지양합시다.');
+        handleJoinConfirm();
     };
 
     const handleModalCancel2 = () => {

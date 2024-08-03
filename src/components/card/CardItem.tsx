@@ -3,9 +3,10 @@ import { useLocation } from 'react-router-dom';
 import styles from './CardItem.module.css';
 import { Avatar, Drawer, Tooltip } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import CardDetail from "./CardDetail.tsx";
+import CardDetail from "./CardDetail";
 import { FaDeleteLeft } from "react-icons/fa6";
-import AsyncModal from "../modal/Modal.tsx";
+import AsyncModal from "../modal/Modal";
+import axios from "axios";
 
 interface Participant {
     id: number;
@@ -27,6 +28,19 @@ const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, 
     const [drawerVisible, setDrawerVisible] = useState(false);
     const location = useLocation();
 
+    const handleCancel = async () => {
+        try {
+            const token = localStorage.getItem('access_token');
+            await axios.delete(`${import.meta.env.VITE_BASE_URL}/meeting/${postId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const showDrawer = (postId: number) => {
         console.log(`Post ID: ${postId}`);
         setDrawerVisible(true);
@@ -42,6 +56,7 @@ const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, 
 
     const handleModalOk = () => {
         setModalOpen(false);
+        handleCancel();
     };
 
     const handleModalCancel = () => {
@@ -80,8 +95,8 @@ const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, 
                     <div className={styles.date}>{formatDateTime(dateTime)}</div>
                     <div className={styles.people}>
                         <Avatar.Group
-                            max={{ count: 3}}
-                            maxPopoverTrigger= "click"
+                            max={{ count: 3 }}
+                            maxPopoverTrigger="click"
                             size="small"
                             maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
                         >
