@@ -59,34 +59,33 @@ const Signup: React.FC = () => {
         try {
             const formData = new FormData();
             if (profileImg && profileImg.originFileObj) {
-                formData.append('file', profileImg.originFileObj);
+                formData.append('image', profileImg.originFileObj, 'image.jpeg');
             }
 
-            const data = {
+            const request = {
                 email: values.email,
                 password: values.password,
                 nickname: values.nickname,
-                profileImageUrl: profileImg ? profileImg.name : ''
             };
 
-            formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
-            // formData.append('data', JSON.stringify(data));
+            formData.append('request', new Blob([JSON.stringify(request)], { type: 'application/json' }));
 
-            console.log(data)
-
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/signUp`, formData, {
+            console.log('Submitting form with data:', formData);
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/signup`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
 
-            if (response.status === 200) {
+            if (response.status >= 200 && response.status <= 300) {
                 message.success('회원가입 성공!');
                 navigate('/login');
+            } else {
+                message.error('회원가입 실패. 다시 시도해주세요.');
             }
         } catch (error) {
-            message.error('회원가입 실패. 다시 시도해주세요.');
-            console.error('Failed:', error);
+            console.error('Signup error:', error);
+            message.error('Network Error. Please try again later.');
         }
     };
 
