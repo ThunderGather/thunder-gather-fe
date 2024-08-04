@@ -1,20 +1,32 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import { ViteFaviconsPlugin } from "vite-plugin-favicon";
+import { VitePWA } from 'vite-plugin-pwa';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    ViteFaviconsPlugin({
-      logo: "public/favicon.png",
+    VitePWA({
+      injectRegister: 'auto',
+      includeAssets: ['favicon.png'],
+      manifest: {
+        name: 'thunder_gather',
+        short_name: 'App',
+        description: 'Your App Description',
+        icons: [
+          {
+            src: 'favicon.png',
+            sizes: '64x64 32x32 24x24 16x16',
+            type: 'image/png',
+          },
+        ],
+      },
     }),
   ],
   build: {
-    outDir: 'dist', // 빌드 아웃풋 디렉토리 설정
-    sourcemap: true // 소스맵 생성 (필요시)
+    outDir: 'dist',
+    sourcemap: true,
   },
   define: {
-    'process.env': {}
-  }
-})
+    'process.env': {},
+  },
+});
