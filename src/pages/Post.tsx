@@ -53,7 +53,7 @@ const Post: React.FC = () => {
         }
 
         setLoading(true);  // Set loading state to true before making the request
-        axios.get(`${import.meta.env.VITE_BASE_URL}/post/list`)
+        axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/post/list`)
             .then(response => {
                 if (Array.isArray(response.data)) {
                     setPosts(response.data);

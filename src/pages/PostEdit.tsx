@@ -72,7 +72,7 @@ const PostEdit: React.FC = () => {
 
         try {
             const token = localStorage.getItem('access_token');
-            const response = await axios.patch(`${import.meta.env.VITE_BASE_URL}/post/${postId}`, postData, {
+            const response = await axios.patch(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`, postData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`

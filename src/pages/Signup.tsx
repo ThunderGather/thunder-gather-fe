@@ -71,7 +71,7 @@ const Signup: React.FC = () => {
             formData.append('request', new Blob([JSON.stringify(request)], { type: 'application/json' }));
 
             console.log('Submitting form with data:', formData);
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/signup`, formData, {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/signup`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

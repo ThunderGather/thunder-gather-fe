@@ -45,7 +45,7 @@ const Profile: React.FC = () => {
         try {
             const token = localStorage.getItem('access_token');
             // 로그아웃 요청
-            await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/logout`, {
+            await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/logout`, {
                 accessToken: token
             }, {
                 headers: {
@@ -69,7 +69,7 @@ const Profile: React.FC = () => {
             setLoading(true);
             const token = localStorage.getItem('access_token');
             try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/meeting/mymeeting`, {
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/meeting/mymeeting`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`

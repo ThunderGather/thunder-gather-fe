@@ -26,7 +26,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
     useEffect(() => {
         const fetchPostData = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/post/${postId}`);
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`);
                 setPostData(response.data);
             } catch (error) {
                 message.error('데이터를 불러오는 데 실패했습니다.');
@@ -44,7 +44,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
     const handleDeleteConfirm = async () => {
         const token = localStorage.getItem('access_token');
         try {
-            await axios.delete(`${import.meta.env.VITE_BASE_URL}/post/${postId}`, {
+            await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

@@ -31,7 +31,7 @@ const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, 
     const handleCancel = async () => {
         try {
             const token = localStorage.getItem('access_token');
-            await axios.delete(`${import.meta.env.VITE_BASE_URL}/meeting/${postId}`, {
+            await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/v1/meeting/${postId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

@@ -45,7 +45,7 @@ const Home: React.FC = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`${import.meta.env.VITE_BASE_URL}/post/list`)
+        axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/post/list`)
             .then(response => {
                 const fetchedPosts = Array.isArray(response.data) ? response.data : [];
                 const todayPosts = fetchedPosts.filter(post => isToday(new Date(post.dateTime)));

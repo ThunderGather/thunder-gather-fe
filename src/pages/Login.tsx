@@ -23,7 +23,7 @@ const Login: React.FC = () => {
         try {
             console.log("Attempting login with values:", values); // Log before request
             const response = await axios.post(
-                `${import.meta.env.VITE_BASE_URL}/auth/signin`,
+                `${import.meta.env.VITE_BASE_URL}/api/v1/auth/signin`,
                 {
                     email: values.email,  // Correct mapping to 'email'
                     password: values.password,  // Correct mapping to 'password'
@@ -32,6 +32,7 @@ const Login: React.FC = () => {
                     headers: {
                         "Content-Type": "application/json",
                     },
+                    withCredentials: true,
                 }
             );
 
