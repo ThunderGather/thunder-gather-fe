@@ -29,20 +29,20 @@ export default defineConfig({
   define: {
     'process.env': {},
   },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://34.71.226.131:8080',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-        secure: false,
-        configure: (proxy) => {
-          proxy.on('proxyReq', (proxyReq) => {
-            // 여기에서 추가 헤더를 설정할 수 있습니다.
-            proxyReq.setHeader('Origin', 'http://localhost:5173');
-          });
-        },
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'http://3.34.132.3:8080',
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/api/, ''),
+  //       secure: false,
+  //       configure: (proxy) => {
+  //         proxy.on('proxyReq', (proxyReq) => {
+  //           // 여기에서 추가 헤더를 설정할 수 있습니다.
+  //           proxyReq.setHeader('Origin', 'http://localhost:5173');
+  //         });
+  //       },
+  //     },
+  //   },
+  // },
 });

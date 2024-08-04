@@ -6,6 +6,7 @@ import { Button, Checkbox, Form, Input, message } from 'antd';
 import axios from 'axios';
 import styles from './Login.module.css';
 
+
 type FieldType = {
     email?: string;
     password?: string;
@@ -32,7 +33,7 @@ const Login: React.FC = () => {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    withCredentials: true,
+                    // withCredentials: true,
                 }
             );
 
