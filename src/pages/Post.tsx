@@ -34,7 +34,6 @@ const Post: React.FC = () => {
 
     const handleChange = (value: string[]) => {
         setSelectedCategories(value);
-        console.log(`selected ${value}`);
     };
 
     const options = [

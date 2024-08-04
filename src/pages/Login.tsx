@@ -2,14 +2,14 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoCloseOutline } from "react-icons/io5";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import {Button, Checkbox, Form, Input, message} from 'antd';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import axios from 'axios';
 import styles from './Login.module.css';
 
 type FieldType = {
-    username?: string;
+    email?: string;
     password?: string;
-    remember?: boolean;
+    // remember?: boolean;
 };
 
 const Login: React.FC = () => {
@@ -21,30 +21,27 @@ const Login: React.FC = () => {
 
     const onFinish = async (values: FieldType) => {
         try {
+            console.log("Attempting login with values:", values); // Log before request
             const response = await axios.post(
                 `${import.meta.env.VITE_BASE_URL}/auth/signin`,
                 {
-                    email: values.username,
-                    password: values.password,
+                    email: values.email,  // Correct mapping to 'email'
+                    password: values.password,  // Correct mapping to 'password'
                 },
                 {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    // withCredentials: true,
                 }
             );
-            // console.log(data);
 
-            if (response.status === 200) {
-                const accessToken = response.data.accessToken
-                localStorage.setItem('access_token', accessToken)
+            if (response.data.accessToken) {
+                localStorage.setItem('access_token', response.data.accessToken);
                 message.success('로그인 성공!');
                 navigate('/profile');
             }
         } catch (error) {
-            message.error('로그인 실패. 다시 시도해주세요.');
-            console.error('Login failed:', error);
+            console.error("Login failed with error:", error); // Log error
         }
     };
 
@@ -73,7 +70,7 @@ const Login: React.FC = () => {
                 >
                     <div className={styles.formItem}>
                         <Form.Item<FieldType>
-                            name="username"
+                            name="email"
                             rules={[{ required: true, message: '아이디를 입력해주세요.' }]}
                         >
                             <Input
@@ -98,7 +95,7 @@ const Login: React.FC = () => {
                     </div>
 
                     <Form.Item<FieldType>
-                        name="remember"
+                        // name="remember"
                         valuePropName="checked"
                         wrapperCol={{ offset: 0, span: 24 }}
                     >
@@ -106,17 +103,15 @@ const Login: React.FC = () => {
                     </Form.Item>
 
                     <Form.Item wrapperCol={{ offset: 0, span: 24 }}>
-                        <Form.Item wrapperCol={{ offset: 0, span: 24 }}>
-                            <div className={styles.submitBtnContainer}>
-                                <Button type="primary" htmlType="submit" className={styles.submitBtn}>
-                                    로그인
-                                </Button>
-                                <div className={styles.signupLink}>
-                                    <span>아이디가 없으신가요? </span>
-                                    <Link to="/signup" className={styles.signupLinkSpan}>회원가입</Link>
-                                </div>
+                        <div className={styles.submitBtnContainer}>
+                            <Button type="primary" htmlType="submit" className={styles.submitBtn}>
+                                로그인
+                            </Button>
+                            <div className={styles.signupLink}>
+                                <span>아이디가 없으신가요? </span>
+                                <Link to="/signup" className={styles.signupLinkSpan}>회원가입</Link>
                             </div>
-                        </Form.Item>
+                        </div>
                     </Form.Item>
                 </Form>
             </div>
