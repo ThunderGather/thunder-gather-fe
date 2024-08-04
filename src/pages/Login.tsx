@@ -20,20 +20,19 @@ const Login: React.FC = () => {
         navigate('/profile');
     };
 
-    const onFinish = async (values: FieldType) => {
+    const handleLogin = async (values: FieldType) => {
         try {
-            console.log("Attempting login with values:", values); // Log before request
+            console.log("Attempting login with values:", values);
             const response = await axios.post(
                 `${import.meta.env.VITE_BASE_URL}/api/v1/auth/signin`,
                 {
-                    email: values.email,  // Correct mapping to 'email'
-                    password: values.password,  // Correct mapping to 'password'
+                    email: values.email,
+                    password: values.password,
                 },
                 {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    // withCredentials: true,
                 }
             );
 
@@ -43,9 +42,22 @@ const Login: React.FC = () => {
                 navigate('/profile');
             }
         } catch (error) {
-            console.error("Login failed with error:", error); // Log error
+            if (axios.isAxiosError(error)) {
+                if (error.response) {
+                    console.error("Login failed with response error:", error.response.data);
+                } else if (error.request) {
+                    console.error("Login failed with request error:", error.request);
+                } else {
+                    console.error("Login failed with error:", error.message);
+                }
+            } else {
+                console.error("An unexpected error occurred:", error);
+            }
         }
     };
+
+
+
 
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
@@ -66,7 +78,7 @@ const Login: React.FC = () => {
                     name="basic"
                     style={{ maxWidth: 700, width: '90%' }}
                     initialValues={{ remember: true }}
-                    onFinish={onFinish}
+                    onFinish={handleLogin}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
