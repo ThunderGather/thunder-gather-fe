@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate} from "react-router-dom";
-import {Form, Input, DatePicker, TimePicker, Select, InputNumber, Row, Col, Button, Checkbox, message} from 'antd';
+import { useNavigate } from "react-router-dom";
+import { Form, Input, DatePicker, TimePicker, Select, InputNumber, Row, Col, Button, Checkbox, message } from 'antd';
 import axios from 'axios';
 import styles from './PostCreate.module.css';
 import Header from "../components/layout/Header";
@@ -15,6 +15,7 @@ const PostCreate: React.FC = () => {
     const [form] = Form.useForm();
     const [componentSize, setComponentSize] = useState<SizeType>('middle');
     const [isOnline, setIsOnline] = useState(false);
+    const [noChatUrl, setNoChatUrl] = useState(false);
     const navigate = useNavigate();
 
     const onFormLayoutChange = ({ size }: { size: SizeType }) => {
@@ -25,6 +26,10 @@ const PostCreate: React.FC = () => {
         setIsOnline(e.target.checked);
     };
 
+    const handleNoChatUrlChange = (e: any) => {
+        setNoChatUrl(e.target.checked);
+    };
+
     useEffect(() => {
         if (isOnline) {
             form.setFieldsValue({ location: '온라인' });
@@ -32,6 +37,14 @@ const PostCreate: React.FC = () => {
             form.setFieldsValue({ location: '' });
         }
     }, [isOnline, form]);
+
+    useEffect(() => {
+        if (noChatUrl) {
+            form.setFieldsValue({ chatUrl: '없음' });
+        } else {
+            form.setFieldsValue({ chatUrl: '' });
+        }
+    }, [noChatUrl, form]);
 
     const handleSubmit = async (values: any) => {
         const postData = {
@@ -125,7 +138,6 @@ const PostCreate: React.FC = () => {
                     <Row gutter={16} align="middle">
                         <Col span={16}>
                             <Form.Item label="위치" name="location" rules={[{ required: true, message: '위치를 입력해주세요!' }]}>
-                                {/*<Input className={styles.inputField} placeholder="위치를 입력해주세요" />*/}
                                 {isOnline ? (
                                     <Input className={styles.inputField} placeholder="위치를 입력해주세요" readOnly />
                                 ) : (
@@ -140,9 +152,22 @@ const PostCreate: React.FC = () => {
                         </Col>
                     </Row>
 
-                    <Form.Item label="오픈채팅방" name="chatUrl" rules={[{ type: 'url', message: '유효한 URL을 입력해주세요!' }]}>
-                        <Input className={styles.inputField} placeholder="오픈채팅방 URL을 입력해주세요" />
-                    </Form.Item>
+                    <Row gutter={16} align="middle">
+                        <Col span={16}>
+                            <Form.Item label="오픈채팅방" name="chatUrl" rules={[{ required: true, message: 'URL을 입력해주세요!' }]}>
+                                {noChatUrl ? (
+                                    <Input className={styles.inputField} placeholder="오픈채팅방 URL을 입력해주세요" readOnly />
+                                ) : (
+                                    <Input className={styles.inputField} placeholder="오픈채팅방 URL을 입력해주세요" />
+                                )}
+                            </Form.Item>
+                        </Col>
+                        <Col span={8}>
+                            <Form.Item name="noChatUrl" valuePropName="checked" style={{ marginTop: '32px' }}>
+                                <Checkbox onChange={handleNoChatUrlChange}>없음</Checkbox>
+                            </Form.Item>
+                        </Col>
+                    </Row>
 
                     <Form.Item>
                         <div className={styles.submitBtnContainer}>

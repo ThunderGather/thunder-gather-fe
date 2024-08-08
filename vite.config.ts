@@ -1,10 +1,15 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { VitePWA } from 'vite-plugin-pwa';
+// import mkcert from 'vite-plugin-mkcert'
+// import basicSsl from '@vitejs/plugin-basic-ssl'
 
 export default defineConfig({
+  // server: { https: true },
   plugins: [
     react(),
+    // basicSsl(),
+    // mkcert(),
     VitePWA({
       injectRegister: 'auto',
       includeAssets: ['favicon.png'],
@@ -21,6 +26,8 @@ export default defineConfig({
         ],
       },
     }),
+
+
   ],
   build: {
     outDir: 'dist',
@@ -29,20 +36,14 @@ export default defineConfig({
   define: {
     'process.env': {},
   },
-  // server: {
-  //   proxy: {
-  //     '/api': {
-  //       target: 'http://3.34.132.3:8080',
-  //       changeOrigin: true,
-  //       rewrite: (path) => path.replace(/^\/api/, ''),
-  //       secure: false,
-  //       configure: (proxy) => {
-  //         proxy.on('proxyReq', (proxyReq) => {
-  //           // 여기에서 추가 헤더를 설정할 수 있습니다.
-  //           proxyReq.setHeader('Origin', 'http://localhost:5173');
-  //         });
-  //       },
-  //     },
-  //   },
-  // },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://3.34.132.3:8080', // Your Spring Boot server URL
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
+
 });

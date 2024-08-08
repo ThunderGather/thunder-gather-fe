@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './CardItem.module.css';
-import { Avatar, Drawer, Tooltip } from 'antd';
+import { Avatar, Drawer, Tooltip, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import CardDetail from "./CardDetail";
 import { FaDeleteLeft } from "react-icons/fa6";
@@ -28,16 +28,26 @@ const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, 
     const [drawerVisible, setDrawerVisible] = useState(false);
     const location = useLocation();
 
+    // const reload = () => {
+    //     history.go(0);
+    // }
+
     const handleCancel = async () => {
         try {
             const token = localStorage.getItem('access_token');
-            await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/v1/meeting/${postId}`, {
+            const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/v1/meeting/${postId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
+            if (response.status >= 200 && response.status < 300 ) {
+                // reload();
+                message.success('번개가 취소되었습니다.');
+
+            }
         } catch (error) {
             console.error(error);
+            message.error('번개 취소에 실패했습니다.');
         }
     }
 
@@ -63,21 +73,6 @@ const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, 
         setModalOpen(false);
     };
 
-    const formatDateTime = (dateTime: string) => {
-        const date = new Date(dateTime);
-        const dayOfWeek = date.toLocaleDateString('ko-KR', { weekday: 'short' });
-        const formattedDate = date.toLocaleDateString('ko-KR', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-        });
-        const formattedTime = date.toLocaleTimeString('en-US', {
-            hour: 'numeric',
-            minute: 'numeric',
-        });
-        return `${formattedDate}(${dayOfWeek}) ${formattedTime}`;
-    }
-
     return (
         <>
             <div className={styles.container}>
@@ -92,7 +87,7 @@ const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, 
                     </div>
 
                     <div className={styles.title}>{title}</div>
-                    <div className={styles.date}>{formatDateTime(dateTime)}</div>
+                    <div className={styles.date}>{dateTime}</div>
                     <div className={styles.people}>
                         <Avatar.Group
                             max={{ count: 3 }}

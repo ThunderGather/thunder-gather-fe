@@ -57,6 +57,7 @@ const Post: React.FC = () => {
             .then(response => {
                 if (Array.isArray(response.data)) {
                     setPosts(response.data);
+                    console.log(response.data);
                 } else {
                     console.error('Unexpected response data:', response.data);
                     setPosts([]);

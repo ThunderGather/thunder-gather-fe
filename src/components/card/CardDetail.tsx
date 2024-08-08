@@ -28,6 +28,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`);
                 setPostData(response.data);
+                console.log(response.data);
             } catch (error) {
                 message.error('데이터를 불러오는 데 실패했습니다.');
             } finally {
@@ -60,20 +61,26 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
     const handleJoinConfirm = async () => {
         const token = localStorage.getItem('access_token');
         try {
-            await axios.post(`${import.meta.env.VITE_BASE_URL}/meeting/${postId}`, {}, {
+            await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/meeting/${postId}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            message.success('참여 완료! 번개 종료 후 해당 오픈채팅방의 이용을 지양합시다.');
+            message.success('참여 완료!');
+            navigate('/profile');
         } catch (error) {
-            message.error('번개 참여에 실패했습니다.');
+            message.error('이미 참여한 번개입니다.');
         }
         setModalOpen2(false);
     };
 
     const handleJoinClick = () => {
-        setModalOpen2(true);
+        const eventDateTime = new Date(`${postData.desiredDate}T${postData.desiredTime}`);
+        if (eventDateTime < new Date()) {
+            message.error('이미 지난 번개입니다.');
+        } else {
+            setModalOpen2(true);
+        }
     };
 
     const handleModalOk = () => {
@@ -111,7 +118,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
             <h2 className={styles.title}>{postData.title}</h2>
             <div className={styles.detailGroup}>
                 <span style={{ color: '#C9C3B6' }}>일시</span>
-                <span>{new Date(postData.dateTime).toLocaleString()}</span>
+                <span>{postData.desiredDate}  {postData.desiredTime}</span>
             </div>
             <div className={styles.detailGroup}>
                 <span style={{ color: '#C9C3B6' }}>위치</span>
@@ -119,7 +126,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
             </div>
             <div className={styles.detailGroup}>
                 <span style={{ color: '#C9C3B6' }}>참석</span>
-                <span>{`${postData.participants?.length || 0}/${postData.maxParticipants}`}</span>
+                <span>{`${postData.members?.length || 0}/${postData.maxParticipants}`}</span>
             </div>
             <div className={styles.detailGroup}>
                 <span style={{ color: '#C9C3B6' }}>오픈채팅</span>
@@ -135,14 +142,14 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
             <hr />
             <div className={styles.participantList}>
                 <div className={styles.partiTopContainer}>
-                    <h2 className={styles.title}>번개 멤버 ({postData.participants?.length || 0}/{postData.maxParticipants})</h2>
+                    <h2 className={styles.title}>번개 멤버 ({postData.members?.length || 0}/{postData.maxParticipants})</h2>
                     <Tooltip title="번개 참여">
                         <button className={styles.joinBtn} onClick={handleJoinClick}>
                             <FaBoltLightning className={styles.icon} />
                         </button>
                     </Tooltip>
                 </div>
-                {postData.participants?.map((participant: any) => (
+                {Array.isArray(postData.members) && postData.members.map((participant: any) => (
                     <CardParticipant
                         key={participant.id}
                         imgSrc={participant.profileImageUrl}

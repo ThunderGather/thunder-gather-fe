@@ -16,7 +16,8 @@ const PostEdit: React.FC = () => {
     const [componentSize, setComponentSize] = useState<SizeType>('middle');
     const [isOnline, setIsOnline] = useState(false);
     const navigate = useNavigate();
-    const { postId } = useParams();
+    const [loading, setLoading] = useState(true);
+    const { postId } = useParams<{ postId: string }>();
 
     const onFormLayoutChange = ({ size }: { size: SizeType }) => {
         setComponentSize(size);
@@ -35,26 +36,38 @@ const PostEdit: React.FC = () => {
     }, [isOnline, form]);
 
     useEffect(() => {
-        // Fetch post data and populate the form fields
-        const postData = {
-            title: "코딩 스터디 모집 (수정)",
-            desiredDate: "2024-09-01",
-            desiredTime: "22:02",
-            category: "공부",
-            capacity: 10,
-            description: "함께 코딩 공부할 분을 추가 모집합니다.",
-            location: "스타벅스 강남점",
-            chatUrl: "https://openchat.example.com",
-            isOnline: false
+        const fetchPostData = async () => {
+            if (!postId) {
+                message.error('유효하지 않은 게시물 ID입니다.');
+                return;
+            }
+
+
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`);
+                const postData = response.data;
+
+                form.setFieldsValue({
+                    title: postData.title,
+                    desiredDate: dayjs(postData.desiredDate),
+                    desiredTime: dayjs(postData.desiredTime, 'HH:mm'),
+                    category: postData.category,
+                    capacity: postData.maxParticipants,
+                    description: postData.description,
+                    location: postData.location,
+                    chatUrl: postData.openChatUrl,
+                    isOnline: postData.location === '온라인',
+                });
+                setIsOnline(postData.location === '온라인');
+                setLoading(false);
+            } catch (error) {
+                message.error('데이터를 불러오는 데 실패했습니다.');
+                setLoading(false);
+            }
         };
 
-        form.setFieldsValue({
-            ...postData,
-            desiredDate: dayjs(postData.desiredDate),
-            desiredTime: dayjs(postData.desiredTime, 'HH:mm')
-        });
-        setIsOnline(postData.isOnline);
-    }, [form]);
+        fetchPostData();
+    }, [form, postId]);
 
     const handleSubmit = async (values: any) => {
         const postData = {
@@ -88,6 +101,10 @@ const PostEdit: React.FC = () => {
             console.error('Error submitting form:', error);
         }
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className={styles.container}>

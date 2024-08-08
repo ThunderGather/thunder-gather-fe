@@ -37,7 +37,9 @@ const Login: React.FC = () => {
             );
 
             if (response.data.accessToken) {
+                console.log(response.data.accessToken)
                 localStorage.setItem('access_token', response.data.accessToken);
+                localStorage.setItem('refresh_token', response.data.refreshToken);
                 message.success('로그인 성공!');
                 navigate('/profile');
             }
