@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { Form, Input, DatePicker, TimePicker, Select, InputNumber, Row, Col, Button, Checkbox, message } from 'antd';
 import styles from './PostEdit.module.css';
 import Header from "../components/layout/Header";
@@ -16,8 +16,9 @@ const PostEdit: React.FC = () => {
     const [componentSize, setComponentSize] = useState<SizeType>('middle');
     const [isOnline, setIsOnline] = useState(false);
     const navigate = useNavigate();
+    // const { postId } = useParams();
     const [loading, setLoading] = useState(true);
-    const { postId } = useParams<{ postId: string }>();
+    const { id } = useParams();
 
     const onFormLayoutChange = ({ size }: { size: SizeType }) => {
         setComponentSize(size);
@@ -37,18 +38,10 @@ const PostEdit: React.FC = () => {
 
     useEffect(() => {
         const fetchPostData = async () => {
-            const postId = useParams();
-            console.log(postId);
-            // console.log()
-            // console.log('postid', postID)
-            // if (!postId) {
-            //     message.error('유효하지 않은 게시물 ID입니다.');
-            //     return;
-            // }
-
+            console.log('id:',id);
 
             try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`);
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${id}`);
                 const postData = response.data;
 
                 form.setFieldsValue({
@@ -79,27 +72,33 @@ const PostEdit: React.FC = () => {
             desiredDate: values.desiredDate.format('YYYY-MM-DD'),
             desiredTime: values.desiredTime.format('HH:mm'), // Convert to 24-hour format
             category: values.category,
-            capacity: values.capacity,
+            maxParticipants: values.capacity,
             description: values.description,
             location: values.location,
-            chatUrl: values.chatUrl
+            openChatUrl: values.chatUrl
         };
 
-        console.log('Post Data:', postData);
+        // console.log('Post Data:', postData);
 
         try {
             const token = localStorage.getItem('access_token');
-            const response = await axios.patch(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`, postData, {
+            const response = await axios.patch(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${id}`, postData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
             });
             console.log('Form Values:', response.data);
-            if (response.status === 200) {
-                message.success('게시물이 수정되었습니다.');
+            if (response.data.errorMessage) {
+                message.error(response.data.errorMessage);
+            } else {
+                message.success('번개가 수정되었습니다.');
                 navigate('/');
             }
+            // if (response.status === 200) {
+            //     message.success('게시물이 수정되었습니다.');
+            //     navigate('/');
+            // }
         } catch (error) {
             message.error('게시물 수정 실패 .. 다시 시도해주세요.');
             console.error('Error submitting form:', error);
@@ -193,7 +192,7 @@ const PostEdit: React.FC = () => {
                         </Col>
                     </Row>
 
-                    <Form.Item label="오픈채팅방" name="chatUrl" rules={[{ type: 'url', message: '유효한 URL을 입력해주세요!' }]}>
+                    <Form.Item label="오픈채팅방" name="chatUrl" rules={[{  required: true,message: 'URL을 입력해주세요!' }]}>
                         <Input className={styles.inputField} placeholder="오픈채팅방 URL을 입력해주세요" />
                     </Form.Item>
 

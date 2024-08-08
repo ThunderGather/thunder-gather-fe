@@ -28,7 +28,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`);
                 setPostData(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             } catch (error) {
                 message.error('데이터를 불러오는 데 실패했습니다.');
             } finally {
@@ -45,13 +45,19 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
     const handleDeleteConfirm = async () => {
         const token = localStorage.getItem('access_token');
         try {
-            await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`, {
+            const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            message.success('번개가 삭제되었습니다.');
-            navigate('/'); // Navigate to another page if needed
+            // console.log('Response:', response);
+            if (response.data.errorMessage) {
+                message.error(response.data.errorMessage);
+            } else {
+                message.success('번개가 삭제되었습니다.');
+                navigate('/');
+            }
+
         } catch (error) {
             message.error('번개 삭제에 실패했습니다.');
         }

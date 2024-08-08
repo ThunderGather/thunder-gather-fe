@@ -4,7 +4,7 @@ export const URL = {
     signup: '/signup',
     post: `/post`,
     createPost: '/post/create',
-    editPost: 'post/edit/:postID',
+    editPost: 'post/edit/:id',
     profile: '/profile',
     postCategory: '/post/:category',
     notices: '/notices'
