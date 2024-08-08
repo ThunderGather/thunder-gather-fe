@@ -45,6 +45,7 @@ const Login: React.FC = () => {
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
+                message.error('로그인에 실패했습니다.')
                 if (error.response) {
                     console.error("Login failed with response error:", error.response.data);
                 } else if (error.request) {

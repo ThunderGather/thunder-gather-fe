@@ -78,6 +78,8 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
         const eventDateTime = new Date(`${postData.desiredDate}T${postData.desiredTime}`);
         if (eventDateTime < new Date()) {
             message.error('이미 지난 번개입니다.');
+        } else if (postData.members.length >= postData.maxParticipants) {
+            message.error('모집이 끝난 번개입니다.');
         } else {
             setModalOpen2(true);
         }
@@ -128,13 +130,15 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
                 <span style={{ color: '#C9C3B6' }}>참석</span>
                 <span>{`${postData.members?.length || 0}/${postData.maxParticipants}`}</span>
             </div>
-            <div className={styles.detailGroup}>
-                <span style={{ color: '#C9C3B6' }}>오픈채팅</span>
-                <button className={styles.urlShortcuts} onClick={() => window.open(postData.openChatUrl, "_blank")}>
-                    바로가기
-                </button>
-                <Paragraph copyable={{ tooltips: false }} className={styles.chatLink}>{postData.openChatUrl}</Paragraph>
-            </div>
+            {postData.openChatUrl !== '없음' && (
+                <div className={styles.detailGroup}>
+                    <span style={{ color: '#C9C3B6' }}>오픈채팅</span>
+                    <button className={styles.urlShortcuts} onClick={() => window.open(postData.openChatUrl, "_blank")}>
+                        바로가기
+                    </button>
+                    <Paragraph copyable={{ tooltips: false }} className={styles.chatLink}>{postData.openChatUrl}</Paragraph>
+                </div>
+            )}
             <div className={styles.description}>
                 {postData.description}
             </div>
