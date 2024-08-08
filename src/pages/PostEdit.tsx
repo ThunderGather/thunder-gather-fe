@@ -37,10 +37,14 @@ const PostEdit: React.FC = () => {
 
     useEffect(() => {
         const fetchPostData = async () => {
-            if (!postId) {
-                message.error('유효하지 않은 게시물 ID입니다.');
-                return;
-            }
+            const postId = useParams();
+            console.log(postId);
+            // console.log()
+            // console.log('postid', postID)
+            // if (!postId) {
+            //     message.error('유효하지 않은 게시물 ID입니다.');
+            //     return;
+            // }
 
 
             try {
@@ -67,7 +71,7 @@ const PostEdit: React.FC = () => {
         };
 
         fetchPostData();
-    }, [form, postId]);
+    }, [form]);
 
     const handleSubmit = async (values: any) => {
         const postData = {
