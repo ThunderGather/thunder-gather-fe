@@ -70,7 +70,7 @@ const Signup: React.FC = () => {
 
             formData.append('request', new Blob([JSON.stringify(request)], { type: 'application/json' }));
 
-            console.log('Submitting form with data:', formData);
+            // console.log('Submitting form with data:', formData);
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/signup`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -89,9 +89,9 @@ const Signup: React.FC = () => {
         }
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
+    // const onFinishFailed = (errorInfo: any) => {
+    //     // console.log('Failed:', errorInfo);
+    // };
 
     return (
         <div className={styles.container}>

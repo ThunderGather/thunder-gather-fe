@@ -28,6 +28,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ postId }) => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/post/${postId}`);
                 setPostData(response.data);
+                console.log(response.data);
                 // console.log(response.data);
             } catch (error) {
                 message.error('데이터를 불러오는 데 실패했습니다.');
