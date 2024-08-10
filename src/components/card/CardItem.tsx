@@ -51,8 +51,8 @@ const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, 
         }
     }
 
-    const showDrawer = (postId: number) => {
-        console.log(`Post ID: ${postId}`);
+    const showDrawer = () => {
+        // console.log(`Post ID: ${postId}`);
         setDrawerVisible(true);
     }
 
@@ -103,7 +103,7 @@ const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, 
                         </Avatar.Group>
                     </div>
                 </div>
-                <button className={styles.button} onClick={() => showDrawer(postId)}><span>more</span></button>
+                <button className={styles.button} onClick={() => showDrawer()}><span>more</span></button>
             </div>
             <Drawer
                 title="번개 자세히 보기"
@@ -111,8 +111,7 @@ const CardItem: React.FC<CardItemProps> = ({ postId, category, title, dateTime, 
                 closable={true}
                 onClose={closeDrawer}
                 open={drawerVisible}
-                height="90%"
-                style={{
+                height="90%" style={{
                     maxWidth: '600px',
                     position: 'absolute',
                     top: '50%',

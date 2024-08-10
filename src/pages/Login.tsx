@@ -22,7 +22,7 @@ const Login: React.FC = () => {
 
     const handleLogin = async (values: FieldType) => {
         try {
-            console.log("Attempting login with values:", values);
+            // console.log("Attempting login with values:", values);
             const response = await axios.post(
                 `${import.meta.env.VITE_BASE_URL}/api/v1/auth/signin`,
                 {
@@ -37,7 +37,7 @@ const Login: React.FC = () => {
             );
 
             if (response.data.accessToken) {
-                console.log(response.data.accessToken)
+                // console.log(response.data.accessToken)
                 localStorage.setItem('access_token', response.data.accessToken);
                 localStorage.setItem('refresh_token', response.data.refreshToken);
                 message.success('로그인 성공!');
@@ -45,7 +45,7 @@ const Login: React.FC = () => {
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                message.error('로그인에 실패했습니다.')
+                // message.error('로그인에 실패했습니다.')
                 if (error.response) {
                     console.error("Login failed with response error:", error.response.data);
                 } else if (error.request) {
